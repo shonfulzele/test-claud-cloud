@@ -43,3 +43,10 @@ golf 064605_f0fa1dc8-d1be-472a-aa70-8eb445a11587
 port 064605_c442a3ef-d1e2-4c29-8f2f-bd2d403fcc60
 brain 064605_6444bec9-3ab6-4e0a-8ffd-3f5cbd67901b
 LIST
+# Kling clips ship with ~5s keyframe intervals, which makes seeks freeze; re-encode with a keyframe every second.
+for f in assets/video/*.mp4; do
+  if ! [ -e "$f.kf" ]; then
+    ffmpeg -loglevel error -y -i "$f" -an -c:v libx264 -crf 16 -r 30 -g 30 -keyint_min 30 -pix_fmt yuv420p -movflags +faststart "$f.tmp.mp4" \
+      && mv "$f.tmp.mp4" "$f" && touch "$f.kf"
+  fi
+done
