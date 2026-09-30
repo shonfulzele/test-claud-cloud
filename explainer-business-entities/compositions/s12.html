@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s12-blend { position: absolute; left: 150px; top: 320px; width: 620px; height: 320px; }
+        .s12-circ { position: absolute; top: 20px; width: 280px; height: 280px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+          font-weight: 700; font-size: 26px; box-sizing: border-box; }
+        #s12-pa { left: 0; border: 3px solid var(--amber); background: rgba(245,176,65,0.08); padding-right: 90px; }
+        #s12-co { left: 200px; border: 3px solid var(--blue); background: rgba(124,178,255,0.08); padding-left: 90px; }
+        #s12-llc { position: absolute; left: 210px; top: 125px; width: 60px; text-align: center; font-family: var(--serif); font-weight: 700; font-size: 44px; }
+        #s12-vocab { position: absolute; left: 150px; top: 680px; width: 620px; display: flex; flex-direction: column; gap: 14px; }
+        .s12-sw { display: flex; align-items: center; gap: 14px; font-size: 26px; }
+        .s12-sw s { color: var(--dim); }
+        #s12-tree { position: absolute; left: 850px; top: 320px; width: 920px; display: flex; flex-direction: column; gap: 22px; }
+        #s12-tree .card { padding: 24px 30px; }
+        .s12-kv { display: flex; justify-content: space-between; align-items: baseline; }
+        .s12-kv h3 { font-size: 34px !important; margin: 0 !important; }
+        .s12-forms { display: flex; gap: 12px; margin-top: 12px; }
+        .s12-forms .chip { font-size: 21px; padding: 8px 18px; }
+      </style>
+      <div id="root" data-composition-id="s12" data-width="1920" data-height="1080">
+        <div class="hdr" id="s12-hdr">
+          <div class="kicker">8c-ii · Entities</div>
+          <h2 class="title-md">Limited Liability Company (LLC)</h2>
+        </div>
+        <div id="s12-blend">
+          <div class="s12-circ" id="s12-pa">Partnership</div>
+          <div class="s12-circ" id="s12-co">Corporation</div>
+          <div id="s12-llc">LLC</div>
+        </div>
+        <div id="s12-vocab">
+          <div class="s12-sw" id="s12-v1"><s>Shareholders</s><span class="mute">→</span><b>Members</b></div>
+          <div class="s12-sw" id="s12-v2"><s>Stock</s><span class="mute">→</span><b>Membership units</b></div>
+          <div class="s12-sw" id="s12-v3"><span class="mute">Governed by</span><b class="amber">an operating agreement</b></div>
+          <div class="s12-sw" id="s12-v4"><span class="chip teal">Limited liability for members</span></div>
+        </div>
+        <div id="s12-tree">
+          <div class="label" id="s12-tl">Taxation</div>
+          <div class="card" id="s12-t1">
+            <div class="s12-kv"><h3>Single-member LLC</h3><span class="label">Default</span></div>
+            <p>Taxed like a sole proprietorship</p>
+            <div class="s12-forms"><span class="chip amber">Schedule C</span><span class="chip">Form 1040</span><span class="chip">Self-employment tax</span></div>
+          </div>
+          <div class="card" id="s12-t2">
+            <div class="s12-kv"><h3>Multi-member LLC</h3><span class="label">Default</span></div>
+            <p>Taxed as a partnership</p>
+            <div class="s12-forms"><span class="chip amber">Form 1065</span><span class="chip amber">Schedule K-1 per member</span></div>
+          </div>
+          <div class="card hl" id="s12-t3">
+            <div class="s12-kv"><h3>Or elect…</h3><span class="label">Election</span></div>
+            <div class="s12-forms"><span class="chip teal">Taxed as S-Corp</span><span class="chip blue">Taxed as C-Corp</span></div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 37.348;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s12-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s12-pa", { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, V + 3.5);
+          tl.fromTo("#s12-co", { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, V + 4.4);
+          tl.fromTo("#s12-llc", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2.5)" }, V + 4.9);
+          tl.fromTo("#s12-v1", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.4 }, V + 6.2);
+          tl.fromTo("#s12-v2", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.4 }, V + 8.6);
+          tl.fromTo("#s12-v3", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.4 }, V + 11.0);
+          tl.fromTo("#s12-v4", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.4 }, V + 13.6);
+          tl.fromTo("#s12-tl", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 15.5);
+          tl.fromTo("#s12-t1", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5 }, V + 16.6);
+          tl.fromTo("#s12-t2", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5 }, V + 23.3);
+          tl.fromTo("#s12-t3", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5 }, V + 31.3);
+          tl.to("#s12-hdr, #s12-blend, #s12-vocab, #s12-tree", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s12"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

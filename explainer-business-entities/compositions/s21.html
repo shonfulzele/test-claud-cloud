@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s21-types { position: absolute; left: 150px; top: 310px; width: 1620px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        #s21-types .card { min-height: 360px; }
+        .s21-logic { font-family: var(--serif); font-size: 46px; font-weight: 700; margin: 14px 0 18px; }
+        .s21-tags { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+        #s21-ex { position: absolute; left: 150px; top: 300px; width: 1620px; }
+        #s21-inputs { display: flex; gap: 16px; margin-top: 16px; }
+        #s21-inputs .chip { font-size: 28px; padding: 14px 26px; }
+        .s21-row { margin-top: 44px; }
+        .s21-rl { display: flex; justify-content: space-between; align-items: baseline; }
+        .s21-rl h3 { font-family: var(--serif); font-size: 36px; margin: 0; }
+        .s21-total { font-family: var(--serif); font-weight: 700; font-size: 64px; }
+        .s21-track { position: relative; height: 70px; margin-top: 12px; background: rgba(244,239,230,0.05); border-radius: 12px; }
+        .s21-seg { position: absolute; top: 0; height: 70px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+          font-weight: 700; font-size: 24px; transform-origin: 0 50%; box-sizing: border-box; }
+        /* scale: $30M exit = 1620px → $1M = 54px */
+        #s21-np { left: 0; width: 540px; background: rgba(79,209,197,0.25); border: 2px solid var(--teal); }
+        #s21-np-alt { position: absolute; left: 560px; top: 16px; font-size: 22px; color: var(--dim); }
+        #s21-p1 { left: 0; width: 540px; background: rgba(245,176,65,0.25); border: 2px solid var(--amber); }
+        #s21-p2 { left: 548px; width: 216px; background: rgba(240,96,93,0.25); border: 2px solid var(--red); }
+        #s21-p2l { position: absolute; left: 784px; top: 16px; font-size: 22px; color: var(--mute); }
+        .s21-axis { display: flex; justify-content: space-between; margin-top: 10px; font-family: var(--mono); font-size: 18px; color: var(--dim); }
+      </style>
+      <div id="root" data-composition-id="s21" data-width="1920" data-height="1080">
+        <div class="hdr" id="s21-hdr">
+          <div class="kicker">9a-ii · Preferred stock in venture deals</div>
+          <h2 class="title-md">Non-participating vs Participating</h2>
+        </div>
+        <div id="s21-types">
+          <div class="card" id="s21-np-card">
+            <h3>Non-participating preferred</h3>
+            <div class="s21-logic">Preference <span class="teal">OR</span> convert</div>
+            <p>Take the liquidation preference, or convert to common for a pro-rata share — <b style="color: var(--ink)">not both</b>. Return is capped at the higher of the two.</p>
+            <div class="s21-tags"><span class="chip teal" id="s21-t1">More common in US venture capital</span></div>
+          </div>
+          <div class="card" id="s21-p-card">
+            <h3>Participating preferred</h3>
+            <div class="s21-logic">Preference <span class="amber">AND</span> share the rest</div>
+            <p>Get the liquidation preference back, then also share in the remaining proceeds with common.</p>
+            <div class="s21-tags"><span class="chip red" id="s21-t2">"Double return"</span><span class="chip" id="s21-t3">Less common</span></div>
+          </div>
+        </div>
+        <div id="s21-ex">
+          <div class="kicker">Worked example · illustrative</div>
+          <div id="s21-inputs">
+            <span class="chip" id="s21-i1">Invests $10M</span>
+            <span class="chip" id="s21-i2">Owns 20%</span>
+            <span class="chip amber" id="s21-i3">Company sells for $30M</span>
+          </div>
+          <div class="s21-row" id="s21-row1">
+            <div class="s21-rl"><h3 class="teal">Non-participating</h3><span class="s21-total teal" id="s21-t-np">$10M</span></div>
+            <div class="s21-track"><div class="s21-seg" id="s21-np">$10M preference</div><div id="s21-np-alt">vs. converting: 20% × $30M = $6M → takes the $10M</div></div>
+          </div>
+          <div class="s21-row" id="s21-row2">
+            <div class="s21-rl"><h3 class="amber">Participating</h3><span class="s21-total amber" id="s21-t-p">$14M</span></div>
+            <div class="s21-track"><div class="s21-seg" id="s21-p1">$10M preference</div><div class="s21-seg" id="s21-p2">+$4M</div><div id="s21-p2l">20% × remaining $20M</div></div>
+          </div>
+          <div class="s21-axis"><span>$0</span><span>$30M exit</span></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 38.624;
+          const tl = gsap.timeline({ paused: true });
+          tl.set("#s21-t-np, #s21-t-p", { opacity: 0 }, 0);
+          tl.fromTo("#s21-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s21-np-card", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 3.1);
+          tl.fromTo("#s21-t1", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4 }, V + 11.6);
+          tl.fromTo("#s21-p-card", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 14.6);
+          tl.fromTo("#s21-t2", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4 }, V + 19.3);
+          tl.fromTo("#s21-t3", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4 }, V + 20.5);
+          tl.to("#s21-types", { opacity: 0, y: -20, duration: 0.45 }, V + 21.8);
+          tl.fromTo("#s21-ex .kicker", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 22.3);
+          tl.fromTo("#s21-i1", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, V + 24.0);
+          tl.fromTo("#s21-i2", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, V + 25.2);
+          tl.fromTo("#s21-i3", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, V + 27.4);
+          tl.fromTo(".s21-axis", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 27.6);
+          tl.fromTo("#s21-row1", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 28.2);
+                    tl.fromTo("#s21-np", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power2.out" }, V + 28.9);
+          tl.fromTo("#s21-np-alt", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 29.3);
+          tl.to("#s21-t-np", { opacity: 1, duration: 0.3 }, V + 30.0);
+          tl.fromTo("#s21-row2", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 31.0);
+                    tl.fromTo("#s21-p1", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power2.out" }, V + 31.7);
+          tl.fromTo("#s21-p2", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, V + 32.9);
+          tl.fromTo("#s21-p2l", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 33.2);
+          tl.to("#s21-t-p", { opacity: 1, duration: 0.3 }, V + 35.1);
+          tl.to("#s21-t-p", { scale: 1.15, duration: 0.25, yoyo: true, repeat: 1 }, V + 35.3);
+          tl.to("#s21-hdr, #s21-ex", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s21"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

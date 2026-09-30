@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s09-open { position: absolute; inset: 0; }
+        #s09-open .copy { position: absolute; left: 150px; top: 330px; width: 1100px; }
+        #s09-open .title { font-size: 120px; margin-top: 20px; }
+        #s09-adv { display: flex; gap: 22px; margin-top: 44px; }
+        #s09-adv .chip { font-size: 32px; padding: 18px 30px; }
+        #s09-life { position: absolute; left: 150px; top: 330px; width: 1620px; }
+        .s09-lane { position: relative; height: 170px; margin-top: 40px; }
+        .s09-name { position: absolute; left: 0; top: 0; font-family: var(--serif); font-weight: 700; font-size: 44px; }
+        .s09-track { position: absolute; left: 0; right: 0; top: 90px; height: 6px; background: var(--line); border-radius: 3px; }
+        .s09-fill { position: absolute; left: 0; top: 84px; height: 18px; border-radius: 9px; transform-origin: 0 50%; }
+        #s09-pf { width: 760px; background: var(--amber); }
+        #s09-cf { width: 1620px; background: linear-gradient(90deg, var(--teal), rgba(79, 209, 197, 0.15)); }
+        #s09-end { position: absolute; left: 740px; top: 66px; width: 54px; height: 54px; border-radius: 50%; background: var(--red);
+          color: #1a0d0d; font-weight: 800; font-size: 32px; display: flex; align-items: center; justify-content: center; }
+        #s09-events { position: absolute; left: 820px; top: 60px; display: flex; gap: 14px; }
+        #s09-inf { position: absolute; right: 0; top: 10px; font-family: var(--serif); font-size: 90px; color: var(--teal); line-height: 1; }
+        #s09-lpnote { margin-top: 10px; }
+      </style>
+      <div id="root" data-composition-id="s09" data-width="1920" data-height="1080">
+        <div id="s09-open">
+          <video id="s09-plate" class="video-plate" src="assets/video/tower.mp4" data-start="0" data-duration="7" data-track-index="0" muted playsinline></video>
+          <div class="shade"></div>
+          <div class="copy">
+            <div class="kicker">8c · Corporations</div>
+            <h2 class="title">Corporations</h2>
+            <div id="s09-adv">
+              <span class="chip teal" id="s09-a1">Limited liability</span>
+              <span class="chip amber" id="s09-a2">Unlimited duration</span>
+            </div>
+          </div>
+        </div>
+        <div id="s09-life">
+          <div class="kicker">Dissolution</div>
+          <div class="s09-lane" id="s09-lane1">
+            <div class="s09-name">Partnership</div>
+            <div class="s09-track"></div>
+            <div class="s09-fill" id="s09-pf"></div>
+            <div id="s09-end">✕</div>
+            <div id="s09-events">
+              <span class="chip red" id="s09-e1">Partner withdraws</span>
+              <span class="chip red" id="s09-e2">Goes bankrupt</span>
+              <span class="chip red" id="s09-e3">Dies</span>
+            </div>
+          </div>
+          <div class="note" id="s09-lpnote">Limited partnerships share this problem with their general partners.</div>
+          <div class="s09-lane" id="s09-lane2">
+            <div class="s09-name">Corporation</div>
+            <div class="s09-track"></div>
+            <div class="s09-fill" id="s09-cf"></div>
+            <div id="s09-inf">∞</div>
+          </div>
+          <div class="body" id="s09-perp" style="margin-top: 10px">Continues <span class="em">in perpetuity</span> — regardless of the investors' status.</div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 20.956;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s09-plate", { scale: 1.06 }, { scale: 1, duration: 7, ease: "none" }, 0);
+          tl.fromTo("#s09-open .kicker, #s09-open .title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2, ease: "power3.out" }, 0.2);
+          tl.fromTo("#s09-a1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(2)" }, V + 3.9);
+          tl.fromTo("#s09-a2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(2)" }, V + 5.2);
+          tl.to("#s09-open", { opacity: 0, duration: 0.6 }, V + 6.4);
+          tl.fromTo("#s09-life .kicker", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 6.8);
+          tl.fromTo("#s09-lane1", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 6.9);
+          tl.fromTo("#s09-pf", { scaleX: 0 }, { scaleX: 1, duration: 1.4, ease: "power1.out" }, V + 7.0);
+          tl.fromTo("#s09-end", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.5)" }, V + 8.5);
+          tl.fromTo("#s09-e1", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.35 }, V + 8.5);
+          tl.fromTo("#s09-e2", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.35 }, V + 9.5);
+          tl.fromTo("#s09-e3", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.35 }, V + 10.4);
+          tl.fromTo("#s09-lpnote", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 11.7);
+          tl.fromTo("#s09-lane2", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 14.9);
+          tl.fromTo("#s09-cf", { scaleX: 0 }, { scaleX: 1, duration: 2.2, ease: "power1.inOut" }, V + 15.0);
+          tl.fromTo("#s09-inf", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, V + 16.2);
+          tl.fromTo("#s09-perp", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, V + 16.4);
+          tl.to("#s09-life", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s09"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

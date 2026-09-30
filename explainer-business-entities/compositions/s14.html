@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s14-t { position: absolute; left: 150px; top: 290px; width: 1620px; }
+        #s14-t .tbl { border-spacing: 0 8px; }
+        #s14-t .tbl td { padding: 12px 24px; font-size: 24px; }
+        #s14-t .tbl th { font-size: 17px; }
+        .s14-u { color: var(--red); font-weight: 700; }
+        .s14-l { color: var(--teal); font-weight: 700; }
+        .s14-p { color: var(--amber); font-weight: 700; }
+        .s14-d { color: var(--red); font-weight: 700; }
+        .s14-cell { display: inline-block; padding: 2px 10px; margin: -2px -10px; border-radius: 8px; }
+        #s14-foot { position: absolute; left: 150px; top: 948px; }
+      </style>
+      <div id="root" data-composition-id="s14" data-width="1920" data-height="1080">
+        <div class="hdr" id="s14-hdr">
+          <div class="kicker">§8 · Summary</div>
+          <h2 class="title-md">The entity landscape</h2>
+        </div>
+        <div id="s14-t">
+          <table class="tbl">
+            <thead><tr><th>Entity</th><th>Owner liability</th><th>Taxation</th></tr></thead>
+            <tbody>
+              <tr><td>Sole proprietorship</td><td><span class="s14-cell s14-u">Unlimited</span></td><td><span class="s14-cell s14-p">Owner's personal return</span></td></tr>
+              <tr><td>General partnership</td><td><span class="s14-cell s14-u">Unlimited · joint &amp; several</span></td><td><span class="s14-cell s14-p">Pass-through</span></td></tr>
+              <tr><td>Limited partnership</td><td><span class="s14-cell s14-u">GP unlimited</span> · <span class="s14-cell s14-l">LP up to contribution</span></td><td><span class="s14-cell s14-p">Pass-through</span></td></tr>
+              <tr><td>LLP</td><td><span class="s14-cell s14-l">Limited (liable for own acts)</span></td><td><span class="s14-cell s14-p">Pass-through</span></td></tr>
+              <tr><td>C-Corporation</td><td><span class="s14-cell s14-l">Limited · strongest</span></td><td><span class="s14-cell s14-d" id="s14-dbl">Double taxation</span></td></tr>
+              <tr><td>S-Corporation</td><td><span class="s14-cell s14-l">Limited</span></td><td><span class="s14-cell s14-p">Pass-through</span></td></tr>
+              <tr><td>LLC</td><td><span class="s14-cell s14-l">Limited</span></td><td><span class="s14-cell s14-p">Pass-through by default (can elect S / C)</span></td></tr>
+              <tr><td>PC / PLLC</td><td><span class="s14-cell s14-l">Limited (not for own negligence)</span></td><td><span class="mute">PC: corporate · PLLC: pass-through</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="s14-foot" class="note">Pause here — this table is your one-page review of §8.</div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 18.016;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s14-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s14-t thead", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.4);
+          tl.fromTo("#s14-t tbody tr", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.12, ease: "power2.out" }, V + 0.3);
+          tl.fromTo(".s14-u", { backgroundColor: "rgba(240,96,93,0)" }, { backgroundColor: "rgba(240,96,93,0.18)", duration: 0.4 }, V + 3.3);
+          tl.fromTo(".s14-l", { backgroundColor: "rgba(79,209,197,0)" }, { backgroundColor: "rgba(79,209,197,0.16)", duration: 0.4 }, V + 6.3);
+          tl.fromTo(".s14-p", { backgroundColor: "rgba(245,176,65,0)" }, { backgroundColor: "rgba(245,176,65,0.16)", duration: 0.4 }, V + 10.2);
+          tl.fromTo("#s14-dbl", { backgroundColor: "rgba(240,96,93,0)", scale: 1 }, { backgroundColor: "rgba(240,96,93,0.25)", scale: 1.08, duration: 0.4 }, V + 11.9);
+          tl.fromTo("#s14-foot", { opacity: 0 }, { opacity: 1, duration: 0.5 }, V + 14.2);
+          tl.to("#s14-hdr, #s14-t, #s14-foot", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s14"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

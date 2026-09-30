@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s18-plate-wrap { position: absolute; inset: 0; }
+        #s18-org { position: absolute; left: 150px; top: 300px; width: 900px; height: 640px; }
+        #s18-org svg { position: absolute; inset: 0; }
+        #s18-sh { position: absolute; left: 300px; top: 0; width: 300px; height: 100px; }
+        #s18-bd { position: absolute; left: 250px; top: 200px; width: 400px; height: 130px; }
+        .s18-of { position: absolute; top: 460px; width: 240px; height: 110px; }
+        #s18-ceo { left: 0; } #s18-cfo { left: 330px; } #s18-sec { left: 660px; }
+        #s18-fid { position: absolute; left: 660px; top: 225px; }
+        #s18-rep { position: absolute; left: 700px; top: 360px; }
+        .s18-panel { position: absolute; left: 1120px; top: 300px; width: 650px; }
+        .s18-panel .list li { font-size: 28px; }
+        #s18-no { margin-top: 22px; }
+      </style>
+      <div id="root" data-composition-id="s18" data-width="1920" data-height="1080">
+        <div id="s18-plate-wrap">
+          <video id="s18-plate" class="video-plate" src="assets/video/board.mp4" data-start="0" data-duration="5" data-track-index="0" muted playsinline></video>
+          <div class="shade" style="background: rgba(13,21,36,0.72)"></div>
+        </div>
+        <div class="hdr" id="s18-hdr">
+          <div class="kicker">9a · Governance</div>
+          <h2 class="title-md">Board of Directors vs Officers</h2>
+        </div>
+        <div id="s18-org">
+          <svg width="900" height="640" viewBox="0 0 900 640" fill="none" stroke="#a3aec2" stroke-width="3">
+            <path id="s18-e1" d="M450 100 V200" />
+            <path id="s18-e2" d="M450 330 V400 H120 V460 M450 400 V460 M450 400 H780 V460" />
+            <path id="s18-e3" d="M800 460 C 860 380, 820 300, 660 270" stroke="#4fd1c5" stroke-dasharray="8 8" />
+          </svg>
+          <div id="s18-sh" class="node">Shareholders</div>
+          <div id="s18-bd" class="node amber">Board of Directors<small>elected by shareholders</small></div>
+          <div id="s18-fid" class="chip amber" style="position:absolute; left:670px; top:160px; font-size:20px;">Fiduciary duty: care &amp; loyalty</div>
+          <div id="s18-ceo" class="node teal s18-of">CEO</div>
+          <div id="s18-cfo" class="node teal s18-of">CFO</div>
+          <div id="s18-sec" class="node teal s18-of">Secretary</div>
+          <div id="s18-rep" class="chip teal" style="position:absolute; left:640px; top:600px; font-size:20px;">↑ Report back on performance</div>
+        </div>
+        <div class="s18-panel" id="s18-bp">
+          <div class="label" style="margin-bottom: 18px">The board</div>
+          <ul class="list">
+            <li id="s18-b1"><span class="n">→</span>Sets corporate strategy</li>
+            <li id="s18-b2"><span class="n">→</span>Approves major policies</li>
+            <li id="s18-b3"><span class="n">→</span>Appoints the officers</li>
+            <li id="s18-b4"><span class="n">→</span>Ensures legal compliance</li>
+          </ul>
+          <div id="s18-no" class="chip red">✕ Doesn't run day-to-day operations</div>
+        </div>
+        <div class="s18-panel" id="s18-op">
+          <div class="label" style="margin-bottom: 18px">The officers</div>
+          <ul class="list">
+            <li id="s18-p1"><span class="n">→</span>Execute the board's strategy</li>
+            <li id="s18-p2"><span class="n">→</span>Manage daily activities</li>
+            <li id="s18-p3"><span class="n">→</span>Report on financial performance</li>
+          </ul>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 28.372;
+          const tl = gsap.timeline({ paused: true });
+          const li = (sel, at) => tl.fromTo(sel, { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.4 }, at);
+          tl.fromTo("#s18-plate", { scale: 1.05 }, { scale: 1, duration: 5, ease: "none" }, 0);
+          tl.to("#s18-plate-wrap", { opacity: 0, duration: 1.0 }, 3.8);
+          tl.fromTo("#s18-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s18-sh", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.4 }, V + 0.1);
+          tl.fromTo("#s18-e1", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 0.7);
+          tl.fromTo("#s18-bd", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.8)" }, V + 1.1);
+          tl.fromTo("#s18-fid", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, V + 3.4);
+          tl.fromTo("#s18-bp .label", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 6.8);
+          li("#s18-b1", V + 7.1);
+          li("#s18-b2", V + 8.1);
+          li("#s18-b3", V + 9.8);
+          li("#s18-b4", V + 11.2);
+          tl.fromTo("#s18-no", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, V + 13.8);
+          tl.to("#s18-bp", { opacity: 0, x: -20, duration: 0.4 }, V + 15.9);
+          tl.fromTo("#s18-e2", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 16.4);
+          tl.fromTo("#s18-ceo", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, V + 18.1);
+          tl.fromTo("#s18-cfo", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, V + 19.1);
+          tl.fromTo("#s18-sec", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, V + 20.2);
+          tl.fromTo("#s18-op .label", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 16.4);
+          li("#s18-p1", V + 20.6);
+          li("#s18-p2", V + 22.8);
+          li("#s18-p3", V + 24.6);
+          tl.fromTo("#s18-e3", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 24.7);
+          tl.fromTo("#s18-rep", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, V + 24.9);
+          tl.to("#s18-hdr, #s18-org, #s18-op", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s18"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

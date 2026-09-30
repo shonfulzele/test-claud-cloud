@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s25-open { position: absolute; inset: 0; }
+        #s25-open .copy { position: absolute; left: 150px; top: 400px; }
+        #s25-open .title { font-size: 120px; margin-top: 18px; }
+        #s25-chain { position: absolute; left: 150px; top: 330px; width: 1620px; height: 320px; }
+        .s25-n { position: absolute; top: 0; width: 230px; height: 200px; padding: 18px; }
+        .s25-n b { font-size: 26px; }
+        .s25-n small { font-size: 18px; line-height: 1.3; }
+        .s25-n .ix { font-family: var(--mono); font-size: 16px; color: var(--amber); letter-spacing: 0.1em; }
+        .s25-ar { position: absolute; top: 85px; font-size: 36px; color: var(--dim); }
+        #s25-dem { position: absolute; left: 115px; top: 230px; width: 1390px; height: 60px; }
+        #s25-dem-l { position: absolute; left: 560px; top: 290px; }
+        #s25-sup { position: absolute; left: 150px; top: 700px; width: 1620px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+        #s25-sup .card { padding: 24px 28px; }
+        #s25-sup h3 { font-size: 32px; }
+        #s25-sup p { font-size: 22px; }
+      </style>
+      <div id="root" data-composition-id="s25" data-width="1920" data-height="1080">
+        <div id="s25-open">
+          <video id="s25-plate" class="video-plate" src="assets/video/port.mp4" data-start="0" data-duration="5" data-track-index="0" muted playsinline></video>
+          <div class="shade"></div>
+          <div class="copy"><div class="kicker">10b · Closing out the fundamentals</div><h2 class="title">The supply chain</h2></div>
+        </div>
+        <div class="hdr" id="s25-hdr">
+          <div class="kicker">10b · Supply chain</div>
+          <h2 class="title-md">The players in the supply chain</h2>
+        </div>
+        <div id="s25-chain">
+          <div class="node s25-n" id="s25-n1" style="left: 0"><span class="ix">01</span><b>Suppliers</b><small>Raw materials &amp; components</small></div>
+          <div class="s25-ar" id="s25-a1" style="left: 243px">→</div>
+          <div class="node s25-n" id="s25-n2" style="left: 278px"><span class="ix">02</span><b>Manufacturers</b><small>Develop &amp; produce · high upfront costs</small></div>
+          <div class="s25-ar" id="s25-a2" style="left: 521px">→</div>
+          <div class="node s25-n" id="s25-n3" style="left: 556px"><span class="ix">03</span><b>Distributors</b><small>Buy in bulk · into the right channels</small></div>
+          <div class="s25-ar" id="s25-a3" style="left: 799px">→</div>
+          <div class="node s25-n" id="s25-n4" style="left: 834px"><span class="ix">04</span><b>Wholesalers</b><small>Large quantities to retailers</small></div>
+          <div class="s25-ar" id="s25-a4" style="left: 1077px">→</div>
+          <div class="node s25-n" id="s25-n5" style="left: 1112px"><span class="ix">05</span><b>Retailers</b><small>Sell to the end consumer</small></div>
+          <div class="s25-ar" id="s25-a5" style="left: 1355px">→</div>
+          <div class="node amber s25-n" id="s25-n6" style="left: 1390px"><span class="ix">06</span><b>End consumers</b><small>Their demand drives it all</small></div>
+          <svg id="s25-dem" width="1390" height="60" viewBox="0 0 1390 60" fill="none">
+            <path d="M1390 10 C 1300 60, 100 60, 10 10" stroke="#f5b041" stroke-width="3" stroke-dasharray="10 10" id="s25-dp" />
+            <path d="M24 2 L8 10 L22 22" stroke="#f5b041" stroke-width="3" />
+          </svg>
+          <div id="s25-dem-l" class="label amber">← Demand flows back up the chain</div>
+        </div>
+        <div id="s25-sup">
+          <div class="card" id="s25-s1"><h3>Agents &amp; brokers</h3><p>Arrange deals between buyers and sellers — never take ownership of the goods.</p></div>
+          <div class="card" id="s25-s2"><h3>Sales reps</h3><p>Represent a manufacturer or wholesaler; extend the producer's sales effort.</p></div>
+          <div class="card" id="s25-s3"><h3>Logistics (3PL)</h3><p>Third-party warehousing, transportation and inventory management.</p></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 36.508;
+          const tl = gsap.timeline({ paused: true });
+          const node = (n, a, at) => {
+            if (a) tl.fromTo(a, { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.3 }, at - 0.2);
+            tl.fromTo(n, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.6)" }, at);
+          };
+          tl.fromTo("#s25-plate", { scale: 1.04 }, { scale: 1, duration: 5, ease: "none" }, 0);
+          tl.fromTo("#s25-open .copy > *", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 }, 0.1);
+          tl.to("#s25-open", { opacity: 0, duration: 0.5 }, V + 1.3);
+          tl.fromTo("#s25-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12 }, V + 1.6);
+          node("#s25-n1", null, V + 2.1);
+          node("#s25-n2", "#s25-a1", V + 5.1);
+          node("#s25-n3", "#s25-a2", V + 10.4);
+          node("#s25-n4", "#s25-a3", V + 14.2);
+          node("#s25-n5", "#s25-a4", V + 19.3);
+          node("#s25-n6", "#s25-a5", V + 20.4);
+          tl.fromTo("#s25-dem", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 21.6);
+          tl.fromTo("#s25-dp", { strokeDashoffset: 0 }, { strokeDashoffset: -200, duration: 14, ease: "none" }, V + 21.6);
+          tl.fromTo("#s25-dem-l", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 21.9);
+          tl.fromTo("#s25-s1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45 }, V + 25.3);
+          tl.fromTo("#s25-s2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45 }, V + 28.0);
+          tl.fromTo("#s25-s3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45 }, V + 31.5);
+          tl.to("#s25-hdr, #s25-chain, #s25-sup", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s25"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

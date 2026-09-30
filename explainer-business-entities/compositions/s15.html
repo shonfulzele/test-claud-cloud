@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s15-sec { position: absolute; left: 150px; top: 300px; width: 1620px; }
+        #s15-sec .big { color: var(--amber); font-size: 260px; }
+        #s15-sec .title { margin-top: 10px; }
+        #s15-def { position: absolute; left: 150px; top: 320px; width: 760px; }
+        #s15-def .q { font-family: var(--serif); font-size: 44px; line-height: 1.25; font-weight: 600; margin-top: 20px; }
+        #s15-goals { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+        #s15-goals .chip { justify-content: center; font-size: 26px; }
+        #s15-doc { position: absolute; left: 1010px; top: 290px; width: 620px; height: 590px; background: #f4efe6; color: #1a2233; border-radius: 10px;
+          padding: 44px 50px; box-sizing: border-box; box-shadow: 0 40px 100px rgba(0,0,0,0.5); }
+        #s15-doc .dt { font-family: var(--serif); font-weight: 700; font-size: 38px; text-align: center; }
+        #s15-doc .ds { font-family: var(--mono); font-size: 16px; letter-spacing: 0.2em; text-align: center; color: #6b7280; margin-top: 6px; }
+        .s15-f { display: flex; gap: 16px; align-items: center; margin-top: 26px; font-size: 24px; font-weight: 600; }
+        .s15-f .ln { flex: 1; height: 10px; border-radius: 5px; background: #d9d2c3; transform-origin: 0 50%; }
+        .s15-f .k { width: 190px; font-family: var(--mono); font-size: 16px; letter-spacing: 0.1em; color: #6b7280; text-transform: uppercase; }
+        #s15-stamp { position: absolute; right: 30px; bottom: 60px; transform: rotate(-12deg); border: 5px solid #c0392b; color: #c0392b; border-radius: 12px;
+          padding: 10px 18px; font-family: var(--mono); font-weight: 500; font-size: 26px; letter-spacing: 0.12em; text-align: center; }
+        #s15-pub { position: absolute; left: 1010px; top: 910px; }
+        #s15-ent { position: absolute; left: 1250px; top: 910px; }
+      </style>
+      <div id="root" data-composition-id="s15" data-width="1920" data-height="1080">
+        <div id="s15-sec">
+          <div class="big">§9</div>
+          <h2 class="title">Governance, Ownership &amp; Control</h2>
+        </div>
+        <div id="s15-def">
+          <div class="kicker">Corporate governance</div>
+          <div class="q">The system of <span class="em">rules, practices and processes</span> by which a company is directed and controlled.</div>
+          <div id="s15-goals">
+            <span class="chip teal" id="s15-g1">Accountability</span>
+            <span class="chip teal" id="s15-g2">Fairness</span>
+            <span class="chip teal" id="s15-g3">Transparency</span>
+            <span class="chip teal" id="s15-g4">Efficiency</span>
+          </div>
+        </div>
+        <div id="s15-doc">
+          <div class="dt">Articles of Incorporation</div>
+          <div class="ds">A.K.A. THE CORPORATE CHARTER</div>
+          <div class="s15-f" id="s15-f1"><span class="k">Name</span><span class="ln"></span></div>
+          <div class="s15-f" id="s15-f2"><span class="k">Purpose</span><span class="ln"></span></div>
+          <div class="s15-f" id="s15-f3"><span class="k">Stock structure</span><span class="ln"></span></div>
+          <div class="s15-f" id="s15-f4"><span class="k">Board</span><span class="ln"></span></div>
+          <div class="s15-f" id="s15-f5"><span class="k">Registered agent</span><span class="ln"></span></div>
+          <div id="s15-stamp"><div>FILED</div><div>WITH THE STATE</div></div>
+        </div>
+        <div id="s15-pub" class="chip amber">Public record</div>
+        <div id="s15-ent" class="chip teal">✓ Distinct legal entity</div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 33.58;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s15-sec .big", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s15-sec .title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, V + 1.3);
+          tl.to("#s15-sec", { opacity: 0, y: -30, duration: 0.5, ease: "power2.in" }, V + 3.8);
+          tl.fromTo("#s15-def .kicker", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 4.3);
+          tl.fromTo("#s15-def .q", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, V + 5.4);
+          tl.fromTo("#s15-g1", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.35 }, V + 11.1);
+          tl.fromTo("#s15-g2", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.35 }, V + 12.0);
+          tl.fromTo("#s15-g3", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.35 }, V + 12.7);
+          tl.fromTo("#s15-g4", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.35 }, V + 13.7);
+          tl.fromTo("#s15-doc", { opacity: 0, y: 60, rotation: 3 }, { opacity: 1, y: 0, rotation: 0, duration: 0.8, ease: "power3.out" }, V + 15.7);
+          tl.fromTo(".s15-f", { opacity: 0.25 }, { opacity: 0.25, duration: 0.01 }, V + 15.7);
+          const field = (sel, at) => {
+            tl.to(sel, { opacity: 1, duration: 0.2 }, at);
+            tl.fromTo(sel + " .ln", { scaleX: 0 }, { scaleX: 1, backgroundColor: "#1a2233", duration: 0.5, ease: "power2.out" }, at);
+          };
+          field("#s15-f1", V + 23.3);
+          field("#s15-f2", V + 23.9);
+          field("#s15-f3", V + 24.5);
+          field("#s15-f4", V + 25.6);
+          field("#s15-f5", V + 26.7);
+          tl.fromTo("#s15-stamp", { opacity: 0, scale: 2.2 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power4.in" }, V + 19.9);
+          tl.fromTo("#s15-pub", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, V + 21.4);
+          tl.fromTo("#s15-ent", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(2)" }, V + 30.3);
+          tl.to("#s15-def, #s15-doc, #s15-pub, #s15-ent", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s15"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

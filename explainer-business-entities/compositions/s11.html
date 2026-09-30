@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        .s11-col { position: absolute; top: 300px; width: 790px; height: 640px; padding: 34px 38px; }
+        #s11-c { left: 150px; } #s11-s { left: 980px; }
+        .s11-name { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; }
+        .s11-name h3 { font-size: 54px !important; margin: 0 !important; }
+        .s11-rows { display: flex; flex-direction: column; gap: 14px; }
+        .s11-r { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-top: 1px solid var(--line); font-size: 26px; }
+        .s11-r .k { color: var(--dim); font-family: var(--mono); font-size: 19px; letter-spacing: 0.12em; text-transform: uppercase; padding-top: 6px; }
+        .s11-r .v { font-weight: 700; text-align: right; }
+        .s11-flow { display: flex; align-items: center; gap: 12px; margin-top: 18px; font-size: 22px; flex-wrap: wrap; }
+        .s11-flow .chip { font-size: 21px; padding: 10px 18px; }
+        .s11-flow .ar { color: var(--dim); }
+        #s11-exam { position: absolute; left: 150px; top: 960px; }
+      </style>
+      <div id="root" data-composition-id="s11" data-width="1920" data-height="1080">
+        <div class="hdr" id="s11-hdr">
+          <div class="kicker">8c · Corporations</div>
+          <h2 class="title-md">C-Corporation vs S-Corporation</h2>
+        </div>
+        <div class="card s11-col" id="s11-c">
+          <div class="s11-name"><h3>C-Corp</h3><span class="label">The standard structure</span></div>
+          <div class="s11-rows">
+            <div class="s11-r" id="s11-c1"><span class="k">Shareholders</span><span class="v">No limit on number or type</span></div>
+            <div class="s11-r" id="s11-c2"><span class="k">Stock</span><span class="v">Multiple classes</span></div>
+            <div class="s11-r" id="s11-c3"><span class="k">Liability</span><span class="v teal">Strongest protection</span></div>
+            <div class="s11-r" id="s11-c4"><span class="k">Taxation</span><span class="v red">Double taxation</span></div>
+          </div>
+          <div class="s11-flow" id="s11-dt">
+            <span class="chip">Corp profits</span><span class="ar">→</span><span class="chip red" id="s11-t1">Taxed</span><span class="ar">→</span>
+            <span class="chip">Dividends</span><span class="ar">→</span><span class="chip red" id="s11-t2">Taxed again</span>
+          </div>
+        </div>
+        <div class="card s11-col" id="s11-s">
+          <div class="s11-name"><h3>S-Corp</h3><span class="label">Small, non-public</span></div>
+          <div class="s11-flow" id="s11-form" style="margin: 0 0 12px">
+            <span class="chip">Form as C-Corp</span><span class="ar">→</span><span class="chip amber">File Form 2553 with IRS</span><span class="ar">→</span><span class="chip teal">S-Corp</span>
+          </div>
+          <div class="s11-rows">
+            <div class="s11-r" id="s11-s1"><span class="k">Shareholders</span><span class="v">Max 100 · generally US citizens / residents</span></div>
+            <div class="s11-r" id="s11-s2"><span class="k">Stock</span><span class="v">One class only</span></div>
+            <div class="s11-r" id="s11-s3"><span class="k">Liability</span><span class="v teal">Limited liability retained</span></div>
+            <div class="s11-r" id="s11-s4"><span class="k">Taxation</span><span class="v amber">Pass-through to owners</span></div>
+          </div>
+        </div>
+        <div id="s11-exam"><span class="exam"><span class="lbl">EXAM</span>Venture firms cannot invest in S-Corps</span></div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 40.948;
+          const tl = gsap.timeline({ paused: true });
+          const row = (sel, at) => tl.fromTo(sel, { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, at);
+          tl.fromTo("#s11-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s11-c", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 0.3);
+          row("#s11-c1", V + 2.8);
+          row("#s11-c2", V + 5.9);
+          row("#s11-c3", V + 8.5);
+          row("#s11-c4", V + 11.3);
+          tl.fromTo("#s11-dt", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, V + 12.8);
+          tl.fromTo("#s11-t1", { scale: 0.7 }, { scale: 1, duration: 0.35, ease: "back.out(3)" }, V + 14.0);
+          tl.fromTo("#s11-t2", { scale: 0.7 }, { scale: 1, duration: 0.35, ease: "back.out(3)" }, V + 15.7);
+          tl.fromTo("#s11-s", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 17.8);
+          tl.fromTo("#s11-form", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, V + 21.4);
+          row("#s11-s1", V + 27.3);
+          row("#s11-s2", V + 31.3);
+          row("#s11-s3", V + 32.2);
+          row("#s11-s4", V + 33.5);
+          tl.fromTo("#s11-exam", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, V + 36.0);
+          tl.to("#s11-hdr, #s11-c, #s11-s, #s11-exam", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s11"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

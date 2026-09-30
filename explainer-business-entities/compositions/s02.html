@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s02-dia { position: absolute; left: 150px; top: 340px; width: 860px; height: 560px; }
+        #s02-owner { position: absolute; left: 0; top: 150px; width: 260px; height: 260px; border-radius: 50%; }
+        #s02-biz { position: absolute; right: 0; top: 150px; width: 300px; height: 260px; }
+        #s02-wall { position: absolute; left: 415px; top: 110px; width: 16px; height: 340px; border-radius: 8px; border: 3px dashed var(--mute); box-sizing: border-box; }
+        #s02-nowall { position: absolute; left: 330px; top: 470px; width: 190px; text-align: center; }
+        #s02-debts { position: absolute; left: 290px; top: 245px; width: 260px; height: 70px; }
+        #s02-debts .d { position: absolute; top: 0; width: 70px; height: 70px; border-radius: 14px; background: rgba(240, 96, 93, 0.16);
+          border: 2px solid var(--red); color: var(--red); font-weight: 800; font-size: 30px; display: flex; align-items: center; justify-content: center; }
+        #s02-facts { position: absolute; left: 1090px; top: 340px; width: 680px; display: flex; flex-direction: column; gap: 26px; }
+        #s02-facts .card { padding: 30px 34px; }
+        #s02-facts .card .label { margin-bottom: 10px; }
+        #s02-facts .card .v { font-family: var(--serif); font-weight: 700; font-size: 44px; }
+      </style>
+      <div id="root" data-composition-id="s02" data-width="1920" data-height="1080">
+        <div class="hdr" id="s02-hdr">
+          <div class="kicker">8a · Business Entities</div>
+          <h2 class="title-md">Sole Proprietorship</h2>
+        </div>
+
+        <div id="s02-dia">
+          <div id="s02-owner" class="node amber">
+            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#f5b041" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" /></svg>
+            One owner<small>owns &amp; runs it</small>
+          </div>
+          <div id="s02-wall"></div>
+          <div id="s02-nowall" class="label red">No wall</div>
+          <div id="s02-debts">
+            <div class="d" id="s02-d1">$</div>
+            <div class="d" id="s02-d2">$</div>
+            <div class="d" id="s02-d3">$</div>
+          </div>
+          <div id="s02-biz" class="node">
+            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#f4efe6" stroke-width="1.8" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5" /></svg>
+            The business<small>easy to form</small>
+          </div>
+        </div>
+
+        <div id="s02-facts">
+          <div class="card" id="s02-f1"><div class="label">Liability</div><div class="v red">Unlimited &amp; personal</div><p>Every business debt and obligation</p></div>
+          <div class="card" id="s02-f2"><div class="label">Taxation</div><div class="v amber">Owner's personal return</div><p>Profits and losses flow straight through</p></div>
+          <div id="s02-f3"><span class="exam"><span class="lbl">NOTE</span>A very imprudent way to conduct business</span></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 25.204;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s02-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s02-owner", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.8)" }, V + 4.0);
+          tl.fromTo("#s02-biz", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.8)" }, V + 5.3);
+          // "no wall between you and the business"
+          tl.fromTo("#s02-wall", { opacity: 0, scaleY: 0 }, { opacity: 1, scaleY: 1, duration: 0.5 }, V + 7.7);
+          tl.to("#s02-wall", { opacity: 0, scaleY: 0.2, duration: 0.5, ease: "power2.in" }, V + 8.3);
+          tl.fromTo("#s02-nowall", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, V + 8.3);
+          // debts travel from business to owner
+          ["#s02-d1", "#s02-d2", "#s02-d3"].forEach((d, i) => {
+            tl.fromTo(d, { opacity: 0, x: 200 }, { opacity: 1, x: 200, duration: 0.2 }, V + 11.0 + i * 0.35);
+            tl.to(d, { x: -60 + i * 20, duration: 1.1, ease: "power2.inOut" }, V + 11.2 + i * 0.35);
+          });
+          tl.to("#s02-owner", { borderColor: "#f0605d", backgroundColor: "rgba(240,96,93,0.14)", duration: 0.5 }, V + 12.3);
+          tl.fromTo("#s02-f1", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, V + 11.0);
+          tl.fromTo("#s02-f2", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, V + 15.3);
+          tl.fromTo("#s02-f3", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.6)" }, V + 21.3);
+          tl.to("#s02-hdr, #s02-dia, #s02-facts", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s02"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

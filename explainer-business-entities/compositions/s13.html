@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s13-pros { position: absolute; left: 150px; top: 310px; display: flex; gap: 16px; align-items: center; }
+        #s13-cards { position: absolute; left: 150px; top: 400px; width: 1620px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        #s13-cards .card { min-height: 0; padding: 30px 36px; }
+        #s13-cards .abbr { font-family: var(--serif); font-weight: 700; font-size: 96px; line-height: 1; margin-bottom: 8px; }
+        #s13-cards .tags { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+        #s13-rule { position: absolute; left: 150px; top: 850px; width: 1620px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        .s13-r { display: flex; align-items: center; gap: 18px; padding: 24px 30px; border-radius: 18px; font-size: 30px; font-weight: 700; }
+        #s13-r1 { background: rgba(79,209,197,0.12); border: 1px solid var(--teal); }
+        #s13-r2 { background: rgba(240,96,93,0.12); border: 1px solid var(--red); }
+        .s13-r .ic { font-size: 40px; }
+      </style>
+      <div id="root" data-composition-id="s13" data-width="1920" data-height="1080">
+        <div class="hdr" id="s13-hdr">
+          <div class="kicker">8c-iii / iv · Licensed professionals</div>
+          <h2 class="title-md">Professional Corporation &amp; Professional LLC</h2>
+        </div>
+        <div id="s13-pros">
+          <span class="chip" id="s13-p1">Doctors</span>
+          <span class="chip" id="s13-p2">Lawyers</span>
+          <span class="chip" id="s13-p3">Architects</span>
+          <span class="chip" id="s13-p4">Accountants</span>
+        </div>
+        <div id="s13-cards">
+          <div class="card" id="s13-pc">
+            <div class="abbr blue">PC</div>
+            <h3>Professional Corporation</h3>
+            <p>Corporate liability protection from business debts — with state rules so only qualified professionals own and govern it.</p>
+            <div class="tags"><span class="chip blue">Corporate protection</span><span class="chip">Licensed owners only</span></div>
+          </div>
+          <div class="card" id="s13-pllc">
+            <div class="abbr teal">PLLC</div>
+            <h3>Professional LLC</h3>
+            <p>Personal liability protection plus the flexibility and pass-through taxation of a standard LLC.</p>
+            <div class="tags"><span class="chip teal">LLC flexibility</span><span class="chip amber">Pass-through tax</span></div>
+          </div>
+        </div>
+        <div id="s13-rule">
+          <div class="s13-r" id="s13-r1"><span class="ic teal">✓</span>A partner's negligence — protected</div>
+          <div class="s13-r" id="s13-r2"><span class="ic red">✕</span>Your own negligence — still liable</div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 28.78;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s13-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s13-p1", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, V + 1.6);
+          tl.fromTo("#s13-p2", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, V + 2.3);
+          tl.fromTo("#s13-p3", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, V + 3.0);
+          tl.fromTo("#s13-p4", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, V + 3.6);
+          tl.fromTo("#s13-pc", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 6.4);
+          tl.fromTo("#s13-pc .tags .chip", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 3.2 }, V + 9.3);
+          tl.fromTo("#s13-pllc", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 15.5);
+          tl.fromTo("#s13-pllc .tags .chip", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 1.0 }, V + 19.0);
+          tl.fromTo("#s13-r1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45 }, V + 23.8);
+          tl.fromTo("#s13-r2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45 }, V + 25.8);
+          tl.to("#s13-hdr, #s13-pros, #s13-cards, #s13-rule", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s13"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

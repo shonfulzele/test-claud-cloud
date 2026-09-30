@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s08-eq { position: absolute; left: 150px; top: 320px; width: 1620px; display: flex; align-items: center; gap: 30px; }
+        #s08-eq .node { height: 150px; padding: 0 30px; font-size: 30px; }
+        #s08-eq .op { font-family: var(--serif); font-size: 72px; color: var(--dim); }
+        #s08-llp { width: 260px; font-family: var(--serif); font-size: 60px !important; }
+        #s08-mid { position: absolute; left: 150px; top: 530px; width: 1620px; display: flex; gap: 20px; align-items: center; }
+        #s08-lower { position: absolute; left: 150px; top: 640px; width: 1620px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        #s08-dia { position: relative; height: 270px; }
+        .s08-p { position: absolute; top: 90px; width: 150px; height: 150px; border-radius: 50%; }
+        #s08-pa { left: 0; } #s08-pb { left: 250px; } #s08-pc { left: 500px; }
+        #s08-err { position: absolute; left: 30px; top: 20px; }
+        .s08-sh { position: absolute; top: 60px; width: 10px; height: 210px; border-radius: 5px; background: var(--teal); box-shadow: 0 0 24px rgba(79,209,197,0.6); }
+        #s08-sh1 { left: 200px; } #s08-sh2 { left: 450px; }
+        #s08-req .list li { font-size: 28px; }
+        #s08-tax { margin-top: 24px; }
+      </style>
+      <div id="root" data-composition-id="s08" data-width="1920" data-height="1080">
+        <div class="hdr" id="s08-hdr">
+          <div class="kicker">8b-iii · Partnerships</div>
+          <h2 class="title-md">Limited Liability Partnership (LLP)</h2>
+        </div>
+        <div id="s08-eq">
+          <div class="node amber" id="s08-e1">Partnership<small>management flexibility</small></div>
+          <div class="op" id="s08-o1">+</div>
+          <div class="node teal" id="s08-e2">Corporate-like<small>liability protection</small></div>
+          <div class="op" id="s08-o2">=</div>
+          <div class="node" id="s08-llp">LLP</div>
+        </div>
+        <div id="s08-mid">
+          <span class="label">Common for</span>
+          <span class="chip" id="s08-j1">Lawyers</span>
+          <span class="chip" id="s08-j2">Accountants</span>
+          <span class="chip" id="s08-j3">Doctors</span>
+        </div>
+        <div id="s08-lower">
+          <div class="card" id="s08-req">
+            <div class="label" style="margin-bottom: 18px">Requires</div>
+            <ul class="list">
+              <li id="s08-q1"><span class="n">✓</span>State registration</li>
+              <li id="s08-q2"><span class="n">✓</span>A formal partnership agreement</li>
+            </ul>
+            <div id="s08-tax"><span class="chip amber">Taxes: pass-through to partners' returns</span></div>
+          </div>
+          <div id="s08-dia">
+            <div id="s08-err" class="chip red">Malpractice</div>
+            <div class="node red s08-p" id="s08-pa">Partner A<small>liable for own acts</small></div>
+            <div class="s08-sh" id="s08-sh1"></div>
+            <div class="node s08-p" id="s08-pb">Partner B<small>protected</small></div>
+            <div class="s08-sh" id="s08-sh2"></div>
+            <div class="node s08-p" id="s08-pc">Partner C<small>protected</small></div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 30.364;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s08-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s08-e1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 3.4);
+          tl.fromTo("#s08-o1", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 5.3);
+          tl.fromTo("#s08-e2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 5.6);
+          tl.fromTo("#s08-o2", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 6.8);
+          tl.fromTo("#s08-llp", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }, V + 7.0);
+          tl.fromTo("#s08-mid .label", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 8.2);
+          tl.fromTo("#s08-j1", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, V + 10.0);
+          tl.fromTo("#s08-j2", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, V + 10.6);
+          tl.fromTo("#s08-j3", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, V + 11.3);
+          tl.fromTo("#s08-req", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 12.4);
+          tl.fromTo("#s08-q1", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.35 }, V + 12.8);
+          tl.fromTo("#s08-q2", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.35 }, V + 14.3);
+          tl.fromTo(".s08-p", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, stagger: 0.12, ease: "back.out(1.8)" }, V + 16.3);
+          tl.fromTo("#s08-err", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35 }, V + 18.9);
+          tl.fromTo(".s08-sh", { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.5, stagger: 0.12 }, V + 19.3);
+          tl.to("#s08-pa", { scale: 1.1, duration: 0.3, yoyo: true, repeat: 1 }, V + 21.2);
+          tl.fromTo("#s08-tax", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, V + 25.6);
+          tl.to("#s08-hdr, #s08-eq, #s08-mid, #s08-lower", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s08"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

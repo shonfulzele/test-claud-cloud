@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s10-shield { position: absolute; left: 150px; top: 330px; width: 460px; height: 560px; }
+        #s10-shield .cap { position: absolute; left: 0; top: 500px; width: 460px; text-align: center; }
+        #s10-grid { position: absolute; left: 700px; top: 330px; width: 1070px; display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+        #s10-grid .card { padding: 28px 32px; min-height: 250px; }
+        #s10-grid .n { font-family: var(--mono); color: var(--red); font-size: 20px; letter-spacing: 0.14em; margin-bottom: 10px; }
+      </style>
+      <div id="root" data-composition-id="s10" data-width="1920" data-height="1080">
+        <div class="hdr" id="s10-hdr">
+          <div class="kicker">8c · Corporate liability</div>
+          <h2 class="title-md">When limited liability fails</h2>
+        </div>
+        <div id="s10-shield">
+          <svg width="460" height="480" viewBox="0 0 460 480" fill="none">
+            <path d="M230 20 L410 90 V230 C410 340 330 420 230 460 C130 420 50 340 50 230 V90 Z" fill="rgba(79,209,197,0.1)" stroke="#4fd1c5" stroke-width="5" id="s10-sh" />
+            <text x="230" y="250" text-anchor="middle" fill="#f4efe6" font-size="34" font-weight="700">Limited</text>
+            <text x="230" y="292" text-anchor="middle" fill="#f4efe6" font-size="34" font-weight="700">liability</text>
+            <path id="s10-k1" d="M230 20 L205 110 L250 150" stroke="#f0605d" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+            <path id="s10-k2" d="M410 170 L330 200 L350 250" stroke="#f0605d" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+            <path id="s10-k3" d="M60 300 L140 320 L120 370" stroke="#f0605d" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+            <path id="s10-k4" d="M230 460 L240 380 L200 330 L260 300 L230 20" stroke="#f0605d" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+          </svg>
+          <div class="label cap">Shareholders / members</div>
+        </div>
+        <div id="s10-grid">
+          <div class="card" id="s10-c1"><div class="n">EXCEPTION 1</div><h3>Personal guarantees</h3><p>Guarantee a loan or lease personally → you're liable if the company fails to pay.</p></div>
+          <div class="card" id="s10-c2"><div class="n">EXCEPTION 2</div><h3>Personal misconduct</h3><p>Always responsible for your own wrongful acts — fraud, theft from the business, harassment.</p></div>
+          <div class="card" id="s10-c3"><div class="n">EXCEPTION 3</div><h3>Breach of duties</h3><p>Failing duties in the bylaws or operating agreement can create personal liability.</p></div>
+          <div class="card hl" id="s10-c4"><div class="n">EXCEPTION 4 · RARE</div><h3>Piercing the corporate veil</h3><p>Courts ignore the separate entity if it isn't properly maintained or is used for fraud.</p></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 29.14;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s10-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s10-shield", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" }, 0.5);
+          const hit = (card, crack, at) => {
+            tl.fromTo(card, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, at);
+            tl.to(crack, { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, at + 0.2);
+          };
+          hit("#s10-c1", "#s10-k1", V + 2.6);
+          hit("#s10-c2", "#s10-k2", V + 7.9);
+          hit("#s10-c3", "#s10-k3", V + 13.3);
+          hit("#s10-c4", "#s10-k4", V + 20.2);
+          tl.to("#s10-sh", { fill: "rgba(240,96,93,0.12)", stroke: "#f0605d", duration: 0.6 }, V + 21.0);
+          tl.to("#s10-hdr, #s10-shield, #s10-grid", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s10"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

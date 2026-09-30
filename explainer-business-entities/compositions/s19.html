@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s19-intro { position: absolute; left: 150px; top: 300px; width: 1620px; display: flex; gap: 24px; align-items: center; }
+        #s19-intro .body { color: var(--ink); font-size: 32px; }
+        #s19-stack { position: absolute; left: 150px; top: 400px; width: 1620px; }
+        .s19-bar { position: relative; height: 96px; border-radius: 14px; display: flex; align-items: center; padding: 0 26px; box-sizing: border-box;
+          font-weight: 700; font-size: 28px; transform-origin: 0 50%; }
+        .s19-bar small { font-weight: 500; font-size: 20px; color: var(--mute); margin-left: 16px; }
+        #s19-auth { width: 1620px; background: rgba(124,178,255,0.12); border: 2px solid var(--blue); }
+        .s19-lvl { display: flex; gap: 16px; margin-top: 16px; }
+        #s19-iss { width: 1060px; background: rgba(245,176,65,0.14); border: 2px solid var(--amber); }
+        #s19-un { width: 544px; background: repeating-linear-gradient(45deg, rgba(163,174,194,0.12) 0 12px, transparent 12px 24px); border: 2px dashed var(--mute); }
+        #s19-out { width: 860px; background: rgba(79,209,197,0.14); border: 2px solid var(--teal); }
+        #s19-tr { width: 184px; background: rgba(182,156,255,0.16); border: 2px solid var(--violet); font-size: 22px; padding: 0 16px; }
+        .s19-def { font-size: 21px; color: var(--mute); margin-top: 8px; height: 30px; }
+        #s19-rights { position: absolute; left: 150px; top: 850px; width: 1620px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        #s19-rights .chip { font-size: 22px; padding: 10px 20px; }
+        #s19-ill { position: absolute; right: 150px; top: 356px; }
+      </style>
+      <div id="root" data-composition-id="s19" data-width="1920" data-height="1080">
+        <div class="hdr" id="s19-hdr">
+          <div class="kicker">9a-ii · Shareholders</div>
+          <h2 class="title-md">Five categories of stock</h2>
+        </div>
+        <div id="s19-intro">
+          <span class="chip amber">1 share = 1 unit of ownership</span>
+          <span class="body">Shares owned ÷ shares outstanding = <b class="amber">your %</b></span>
+        </div>
+        <div id="s19-ill" class="note">Bar widths are illustrative</div>
+        <div id="s19-stack">
+          <div class="s19-bar blue" id="s19-auth">Authorized<small>max the charter allows</small></div>
+          <div class="s19-lvl">
+            <div>
+              <div class="s19-bar amber" id="s19-iss">Issued<small>sold or distributed</small></div>
+              <div class="s19-lvl">
+                <div class="s19-bar teal" id="s19-out">Outstanding<small>held by investors · can vote</small></div>
+                <div class="s19-bar violet" id="s19-tr">Treasury</div>
+              </div>
+              <div class="s19-def" id="s19-trd">Treasury = issued, then bought back by the company</div>
+            </div>
+            <div class="s19-bar mute" id="s19-un">Unissued<small>future raises · ESOP</small></div>
+          </div>
+        </div>
+        <div id="s19-rights">
+          <span class="label" style="margin-right: 8px">Shareholder rights</span>
+          <span class="chip" id="s19-r1">Voting</span>
+          <span class="chip" id="s19-r2">Dividends (if declared)</span>
+          <span class="chip" id="s19-r3">Residual claim in liquidation</span>
+          <span class="chip" id="s19-r4">Inspect records</span>
+          <span class="chip" id="s19-r5">Transferability</span>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 36.124;
+          const tl = gsap.timeline({ paused: true });
+          const bar = (sel, at) => tl.fromTo(sel, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.7, ease: "power3.out" }, at);
+          tl.fromTo("#s19-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s19-intro > *", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, stagger: 1.8 }, V + 0.3);
+          tl.fromTo("#s19-ill", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 7.0);
+          bar("#s19-auth", V + 7.1);
+          bar("#s19-iss", V + 10.0);
+          bar("#s19-un", V + 12.6);
+          bar("#s19-out", V + 17.8);
+          bar("#s19-tr", V + 21.1);
+          tl.fromTo("#s19-trd", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 22.7);
+          tl.fromTo("#s19-rights .label", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 24.6);
+          [["#s19-r1", 25.5], ["#s19-r2", 26.4], ["#s19-r3", 28.3], ["#s19-r4", 31.3], ["#s19-r5", 33.2]].forEach(([s, t]) =>
+            tl.fromTo(s, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)" }, V + t));
+          tl.to("#s19-hdr, #s19-intro, #s19-ill, #s19-stack, #s19-rights", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s19"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

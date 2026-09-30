@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s23-sec { position: absolute; left: 150px; top: 300px; width: 1620px; }
+        #s23-sec .big { color: var(--amber); font-size: 260px; }
+        #s23-lever { position: absolute; left: 150px; top: 330px; width: 1100px; height: 560px; }
+        #s23-lever svg { position: absolute; inset: 0; overflow: visible; }
+        .s23-tag { position: absolute; font-size: 26px; font-weight: 700; text-align: center; width: 300px; }
+        .s23-tag .a, .s23-tag .b { display: block; }
+        .s23-tag .b { position: absolute; left: 0; right: 0; top: 0; }
+        #s23-tl { left: 20px; top: 70px; } #s23-tb { left: 420px; top: 470px; } #s23-tf { left: 780px; top: 70px; }
+        #s23-side { position: absolute; left: 1300px; top: 340px; width: 470px; display: flex; flex-direction: column; gap: 22px; }
+        #s23-mix { display: flex; height: 64px; border-radius: 12px; overflow: hidden; margin-top: 12px; }
+        #s23-mix .d { width: 60%; background: rgba(240,96,93,0.3); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        #s23-mix .e { width: 40%; background: rgba(79,209,197,0.3); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+      </style>
+      <div id="root" data-composition-id="s23" data-width="1920" data-height="1080">
+        <div id="s23-sec">
+          <div class="big">§10</div>
+          <h2 class="title">Leverage</h2>
+        </div>
+        <div class="hdr" id="s23-hdr">
+          <div class="kicker">10a · Closing out the fundamentals</div>
+          <h2 class="title-md">Understanding leverage</h2>
+        </div>
+        <div id="s23-lever">
+          <svg width="1100" height="560" viewBox="0 0 1100 560" fill="none">
+            <g id="s23-beam">
+              <rect x="60" y="300" width="980" height="22" rx="11" fill="#f4efe6" />
+              <rect x="80" y="160" width="220" height="140" rx="16" fill="rgba(124,178,255,0.25)" stroke="#7cb2ff" stroke-width="4" />
+            </g>
+            <path d="M420 322 L480 440 L360 440 Z" fill="rgba(245,176,65,0.3)" stroke="#f5b041" stroke-width="4" id="s23-fulcrum" />
+            <g id="s23-force"><path d="M960 120 V270" stroke="#4fd1c5" stroke-width="8" stroke-linecap="round" /><path d="M935 245 L960 280 L985 245" stroke="#4fd1c5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" /></g>
+          </svg>
+          <div class="s23-tag" id="s23-tl"><span class="a blue">Load</span><span class="b blue">Assets</span></div>
+          <div class="s23-tag" id="s23-tb"><span class="a amber">Fulcrum</span><span class="b amber">Capital structure</span></div>
+          <div class="s23-tag" id="s23-tf"><span class="a teal">Lever + force</span><span class="b red">Debt (the lever)</span></div>
+        </div>
+        <div id="s23-side">
+          <div class="card" id="s23-k1"><div class="label">Physics</div><p>A lever moves a heavy load with less force.</p></div>
+          <div class="card" id="s23-k2"><div class="label">Capital structure = the mix</div>
+            <div id="s23-mix"><div class="d">Debt</div><div class="e">Equity</div></div></div>
+          <div class="card hl" id="s23-k3"><div class="label">More debt amplifies</div><p><b class="green">↑ Return on equity</b> — and <b class="red">↓ losses</b> too.</p></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 23.164;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s23-sec .big", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s23-sec .title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, V + 2.9);
+          tl.to("#s23-sec", { opacity: 0, y: -30, duration: 0.5 }, V + 3.9);
+          tl.fromTo("#s23-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12 }, V + 4.2);
+          tl.fromTo("#s23-lever", { opacity: 0 }, { opacity: 1, duration: 0.6 }, V + 4.6);
+          tl.fromTo("#s23-beam", { rotation: -8, svgOrigin: "420 311" }, { rotation: -8, svgOrigin: "420 311", duration: 0.01 }, 0);
+          tl.fromTo(".s23-tag .a", { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.3 }, V + 5.3);
+          tl.fromTo(".s23-tag .b", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+          tl.fromTo("#s23-k1", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.5 }, V + 4.4);
+          tl.fromTo("#s23-force", { y: -40 }, { y: 0, duration: 0.6, ease: "power2.in" }, V + 6.6);
+          tl.to("#s23-beam", { rotation: 8, svgOrigin: "420 311", duration: 1.0, ease: "power2.inOut" }, V + 6.9);
+          // relabel in finance
+          const swap = (id, at) => { tl.to(id + " .a", { opacity: 0, y: -12, duration: 0.3 }, at); tl.fromTo(id + " .b", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, at + 0.15); };
+          swap("#s23-tf", V + 9.2);
+          swap("#s23-tl", V + 10.7);
+          swap("#s23-tb", V + 13.0);
+          tl.fromTo("#s23-k2", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.5 }, V + 15.0);
+          tl.fromTo("#s23-k3", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.5 }, V + 17.3);
+          tl.to("#s23-beam", { rotation: 14, svgOrigin: "420 311", duration: 0.7, ease: "power2.out" }, V + 17.5);
+          tl.to("#s23-beam", { rotation: -14, svgOrigin: "420 311", duration: 0.9, ease: "power2.in" }, V + 19.9);
+          tl.to("#s23-hdr, #s23-lever, #s23-side", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s23"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

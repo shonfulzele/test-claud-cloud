@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        .s07-panel { position: absolute; top: 330px; width: 760px; height: 600px; }
+        #s07-left { left: 150px; } #s07-right { left: 1010px; }
+        .s07-chart { position: absolute; left: 0; top: 70px; width: 760px; height: 440px; border-bottom: 2px solid var(--line); }
+        .s07-basis { position: absolute; left: 0; right: 0; top: 160px; border-top: 3px dashed var(--amber); }
+        .s07-basis span { position: absolute; right: 0; top: -40px; font-family: var(--mono); font-size: 19px; color: var(--amber); letter-spacing: 0.12em; }
+        .s07-bar { position: absolute; bottom: 0; width: 200px; transform-origin: 50% 100%; border-radius: 12px 12px 0 0; }
+        #s07-in { left: 120px; height: 280px; background: rgba(123, 216, 143, 0.25); border: 2px solid var(--green); }
+        #s07-ex { left: 120px; bottom: 280px; height: 130px; background: rgba(240, 96, 93, 0.25); border: 2px solid var(--red); border-radius: 12px 12px 0 0; }
+        #s07-lin { left: 120px; height: 280px; background: rgba(124, 178, 255, 0.2); border: 2px solid var(--blue); }
+        #s07-lex { left: 120px; bottom: 280px; height: 130px; background: repeating-linear-gradient(45deg, rgba(163,174,194,0.25) 0 10px, transparent 10px 20px); border: 2px dashed var(--mute); border-radius: 12px 12px 0 0; }
+        .s07-lab { position: absolute; left: 350px; font-size: 26px; font-weight: 600; }
+        #s07-l1 { top: 400px; } #s07-l2 { top: 250px; } #s07-l3 { top: 400px; } #s07-l4 { top: 250px; }
+        #s07-carry { position: absolute; left: 350px; top: 300px; }
+        .s07-cap { position: absolute; left: 0; top: 540px; }
+      </style>
+      <div id="root" data-composition-id="s07" data-width="1920" data-height="1080">
+        <div class="hdr" id="s07-hdr">
+          <div class="kicker">8b-ii · One more rule</div>
+          <h2 class="title-md">Distributions, losses &amp; your basis</h2>
+        </div>
+        <div class="s07-panel" id="s07-left">
+          <div class="label">Cash / property distributions</div>
+          <div class="s07-chart">
+            <div class="s07-bar" id="s07-in"></div>
+            <div class="s07-bar" id="s07-ex"></div>
+            <div class="s07-basis"><span>ADJUSTED BASIS</span></div>
+            <div class="s07-lab green" id="s07-l1">Up to basis → not taxable</div>
+            <div class="s07-lab red" id="s07-l2">Excess → capital gain</div>
+          </div>
+        </div>
+        <div class="s07-panel" id="s07-right">
+          <div class="label">Partnership losses</div>
+          <div class="s07-chart">
+            <div class="s07-bar" id="s07-lin"></div>
+            <div class="s07-bar" id="s07-lex"></div>
+            <div class="s07-basis"><span>ADJUSTED BASIS</span></div>
+            <div class="s07-lab blue" id="s07-l3">Deductible up to basis</div>
+            <div class="s07-lab mute" id="s07-l4">Beyond basis → can't deduct now</div>
+          </div>
+          <div class="chip amber" id="s07-carry" style="position:absolute; left:350px; top:420px;">↻ Carried forward</div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 18.532;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s07-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s07-left .label, #s07-left .s07-basis", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 1.6);
+          tl.fromTo("#s07-in", { scaleY: 0 }, { scaleY: 1, duration: 0.9, ease: "power2.out" }, V + 2.4);
+          tl.fromTo("#s07-l1", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.4 }, V + 3.8);
+          tl.fromTo("#s07-ex", { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: "power2.out" }, V + 5.5);
+          tl.fromTo("#s07-l2", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.4 }, V + 9.1);
+          tl.fromTo("#s07-right .label, #s07-right .s07-basis", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 11.7);
+          tl.fromTo("#s07-lin", { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: "power2.out" }, V + 12.0);
+          tl.fromTo("#s07-l3", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.4 }, V + 12.6);
+          tl.fromTo("#s07-lex", { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power2.out" }, V + 13.3);
+          tl.fromTo("#s07-l4", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.4 }, V + 13.6);
+          tl.fromTo("#s07-carry", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, V + 15.9);
+          tl.to("#s07-lex", { x: 520, opacity: 0.2, duration: 1.0, ease: "power2.in" }, V + 16.2);
+          tl.to("#s07-hdr, #s07-left, #s07-right", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s07"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

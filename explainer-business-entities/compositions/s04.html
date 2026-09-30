@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s04-org { position: absolute; left: 150px; top: 340px; width: 820px; height: 560px; }
+        #s04-org svg { position: absolute; inset: 0; }
+        #s04-gp { position: absolute; left: 260px; top: 0; width: 300px; height: 130px; }
+        #s04-fund { position: absolute; left: 285px; top: 210px; width: 250px; height: 100px; }
+        .s04-lp { position: absolute; top: 400px; width: 220px; height: 120px; }
+        #s04-lp1 { left: 20px; } #s04-lp2 { left: 300px; } #s04-lp3 { left: 580px; }
+        #s04-tag { position: absolute; left: 0; top: 540px; }
+        #s04-fees { position: absolute; left: 1060px; top: 340px; width: 710px; display: flex; flex-direction: column; gap: 28px; }
+        #s04-fees .card { padding: 30px 36px; }
+        .s04-head { display: flex; align-items: baseline; justify-content: space-between; }
+        .s04-pct { font-family: var(--serif); font-weight: 700; font-size: 110px; line-height: 1; color: var(--amber); }
+        #s04-mf p { margin-top: 10px; }
+      </style>
+      <div id="root" data-composition-id="s04" data-width="1920" data-height="1080">
+        <div class="hdr" id="s04-hdr">
+          <div class="kicker">8b-ii · Partnerships</div>
+          <h2 class="title-md">Limited Partnership — the fee structure</h2>
+        </div>
+        <div id="s04-org">
+          <svg width="820" height="560" viewBox="0 0 820 560" fill="none" stroke="#a3aec2" stroke-width="3">
+            <path id="s04-e1" d="M410 130 V210" />
+            <path id="s04-e2" d="M410 310 V360 H130 V400 M410 360 H690 V400 M410 360 V400" />
+          </svg>
+          <div id="s04-gp" class="node amber">General Partner (GP)<small>at least one · manages</small></div>
+          <div id="s04-fund" class="node">The Fund</div>
+          <div id="s04-lp1" class="node teal s04-lp">Limited Partner<small>LP</small></div>
+          <div id="s04-lp2" class="node teal s04-lp">Limited Partner<small>LP</small></div>
+          <div id="s04-lp3" class="node teal s04-lp">Limited Partner<small>LP</small></div>
+        </div>
+        <div id="s04-tag" class="chip blue" style="position:absolute; left:150px; top:930px;">Classic structure for private investment funds</div>
+
+        <div id="s04-fees">
+          <div class="label" id="s04-two">The GP typically charges two fees</div>
+          <div class="card" id="s04-mf">
+            <div class="s04-head"><h3>① Management fee</h3><span class="label">Annual</span></div>
+            <p>Paid by the LPs to the GP to cover the fund's operating expenses.</p>
+            <div class="row" style="align-items: flex-end; margin-top: 18px" id="s04-pctrow">
+              <span class="s04-pct">2%</span><span class="body" style="padding-bottom: 14px">of committed capital</span>
+            </div>
+            <div class="note" id="s04-early">Common, especially in the early "investment period"</div>
+          </div>
+          <div class="card" id="s04-ci">
+            <div class="s04-head"><h3>② Carried interest</h3><span class="label">"Carry"</span></div>
+            <p>The GP's share of the fund's investment profits — its main incentive to maximize returns.</p>
+          </div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 31.348;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s04-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s04-gp", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, V + 1.7);
+          tl.fromTo("#s04-e1", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 2.2);
+          tl.fromTo("#s04-fund", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5 }, V + 2.4);
+          tl.fromTo("#s04-e2", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 3.5);
+          tl.fromTo(".s04-lp", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.15, ease: "back.out(1.6)" }, V + 3.7);
+          tl.fromTo("#s04-tag", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, V + 6.5);
+          tl.fromTo("#s04-two", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 10.4);
+          tl.fromTo("#s04-mf", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, V + 13.0);
+          tl.fromTo("#s04-pctrow, #s04-early", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.3 }, V + 22.8);
+          tl.to("#s04-lp1, #s04-lp2, #s04-lp3", { borderColor: "#f5b041", duration: 0.3, yoyo: true, repeat: 1 }, V + 14.6);
+          tl.fromTo("#s04-ci", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, V + 25.8);
+          tl.to("#s04-ci", { borderColor: "#f5b041", duration: 0.4 }, V + 27.8);
+          tl.to("#s04-hdr, #s04-org, #s04-tag, #s04-fees", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s04"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

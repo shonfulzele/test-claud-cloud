@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s03-persons { position: absolute; left: 150px; top: 300px; display: flex; gap: 16px; align-items: center; }
+        #s03-dia { position: absolute; left: 150px; top: 400px; width: 960px; height: 520px; }
+        #s03-dia svg { position: absolute; inset: 0; }
+        #s03-gp { position: absolute; left: 330px; top: 190px; width: 300px; height: 130px; }
+        .s03-p { position: absolute; width: 150px; height: 150px; border-radius: 50%; }
+        #s03-p1 { left: 60px; top: 10px; } #s03-p2 { left: 60px; top: 350px; } #s03-p3 { left: 750px; top: 350px; }
+        #s03-cred { position: absolute; left: 740px; top: 0; width: 200px; height: 110px; }
+        #s03-debt { position: absolute; left: 700px; top: 130px; }
+        #s03-side { position: absolute; left: 1160px; top: 400px; width: 610px; }
+        #s03-side .card { position: absolute; left: 0; top: 0; width: 610px; }
+        #s03-share { display: flex; gap: 14px; margin-top: 20px; flex-wrap: wrap; }
+        .s03-big { font-family: var(--serif); font-weight: 700; font-size: 46px; line-height: 1.1; margin-bottom: 14px; }
+      </style>
+      <div id="root" data-composition-id="s03" data-width="1920" data-height="1080">
+        <div class="hdr" id="s03-hdr">
+          <div class="kicker">8b-i · Partnerships</div>
+          <h2 class="title-md">General Partnership</h2>
+        </div>
+        <div id="s03-persons">
+          <span class="label">"Persons" can be</span>
+          <span class="chip" id="s03-t1">Individuals</span>
+          <span class="chip" id="s03-t2">Groups</span>
+          <span class="chip" id="s03-t3">Companies</span>
+          <span class="chip" id="s03-t4">Corporations</span>
+        </div>
+
+        <div id="s03-dia">
+          <svg width="960" height="520" viewBox="0 0 960 520" fill="none">
+            <path id="s03-l1" d="M190 110 L340 230" stroke="#a3aec2" stroke-width="3" stroke-dasharray="6 8" />
+            <path id="s03-l2" d="M190 420 L340 300" stroke="#a3aec2" stroke-width="3" stroke-dasharray="6 8" />
+            <path id="s03-l3" d="M760 420 L620 300" stroke="#a3aec2" stroke-width="3" stroke-dasharray="6 8" />
+            <path id="s03-claim" d="M820 110 C 700 200, 300 380, 200 425" stroke="#f0605d" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+          </svg>
+          <div id="s03-gp" class="node">General Partnership<small>2+ persons · state law</small></div>
+          <div id="s03-p1" class="node s03-p">Partner<small>A</small></div>
+          <div id="s03-p2" class="node s03-p">Partner<small>B</small></div>
+          <div id="s03-p3" class="node s03-p">Partner<small>C</small></div>
+          <div id="s03-cred" class="node red">Creditor</div>
+          <div id="s03-debt" class="chip red">Can pursue ONE partner for the ENTIRE debt</div>
+        </div>
+
+        <div id="s03-side">
+          <div class="card" id="s03-k1">
+            <div class="label">Every partner shares in</div>
+            <div id="s03-share">
+              <span class="chip teal" id="s03-sh1">Profits</span>
+              <span class="chip red" id="s03-sh2">Losses</span>
+              <span class="chip amber" id="s03-sh3">Control</span>
+            </div>
+          </div>
+          <div class="card hl" id="s03-k2">
+            <div class="label">Liability</div>
+            <div class="s03-big red">Unlimited &amp; personal</div>
+            <p>Partners are <b style="color: var(--ink)">jointly and severally</b> liable for the partnership's debts.</p>
+          </div>
+          <div class="card" id="s03-k3">
+            <div class="label">Taxes</div>
+            <div class="s03-big amber">Not a taxable entity</div>
+            <p>Income passes through to partners in proportion to their share of profits.</p>
+          </div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 35.596;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s03-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s03-gp", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, V + 1.9);
+          tl.fromTo(".s03-p", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, stagger: 0.18, ease: "back.out(1.8)" }, V + 4.1);
+          tl.fromTo("#s03-l1, #s03-l2, #s03-l3", { opacity: 0 }, { opacity: 1, duration: 0.5, stagger: 0.18 }, V + 4.3);
+          tl.fromTo("#s03-persons .label", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 7.0);
+          tl.fromTo("#s03-t1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35 }, V + 7.8);
+          tl.fromTo("#s03-t2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35 }, V + 8.8);
+          tl.fromTo("#s03-t3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35 }, V + 9.9);
+          tl.fromTo("#s03-t4", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35 }, V + 10.9);
+          // shares
+          tl.fromTo("#s03-k1", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5 }, V + 12.3);
+          tl.fromTo("#s03-sh1", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35 }, V + 13.3);
+          tl.fromTo("#s03-sh2", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35 }, V + 14.1);
+          tl.fromTo("#s03-sh3", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35 }, V + 15.0);
+          tl.to("#s03-k1", { opacity: 0, x: -30, duration: 0.4 }, V + 16.8);
+          // unlimited, joint & several
+          tl.fromTo("#s03-k2", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5 }, V + 17.4);
+          tl.to(".s03-p", { borderColor: "#f0605d", backgroundColor: "rgba(240,96,93,0.14)", duration: 0.5, stagger: 0.1 }, V + 18.2);
+          tl.fromTo("#s03-cred", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5 }, V + 22.9);
+          tl.to("#s03-claim", { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" }, V + 23.8);
+          tl.fromTo("#s03-debt", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, V + 25.3);
+          tl.to("#s03-p2", { scale: 1.12, duration: 0.3, yoyo: true, repeat: 1 }, V + 25.3);
+          tl.to("#s03-k2", { opacity: 0, x: -30, duration: 0.4 }, V + 26.3);
+          // taxes
+          tl.to("#s03-cred, #s03-debt, #s03-claim", { opacity: 0, duration: 0.4 }, V + 26.6);
+          tl.fromTo("#s03-k3", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5 }, V + 26.8);
+          tl.to(".s03-p", { borderColor: "#f5b041", backgroundColor: "rgba(245,176,65,0.1)", duration: 0.5, stagger: 0.12 }, V + 30.4);
+          tl.to("#s03-gp", { opacity: 0.4, duration: 0.5 }, V + 28.5);
+          tl.to("#s03-hdr, #s03-persons, #s03-dia, #s03-side", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s03"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s24-open { position: absolute; inset: 0; }
+        #s24-open .copy { position: absolute; left: 150px; top: 400px; }
+        #s24-open .title { font-size: 120px; margin-top: 18px; }
+        #s24-cols { position: absolute; left: 150px; top: 300px; width: 1620px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        #s24-cols .card { height: 560px; position: relative; }
+        .s24-top { display: flex; gap: 26px; align-items: flex-start; }
+        .s24-club { width: 90px; height: 170px; flex: none; }
+        .s24-tags { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+        .s24-roe { position: absolute; left: 40px; right: 40px; bottom: 34px; height: 250px; }
+        .s24-axis { position: absolute; left: 0; right: 0; top: 125px; height: 2px; background: var(--line); }
+        .s24-b { position: absolute; width: 150px; border-radius: 8px; display: flex; justify-content: center; font-weight: 800; font-size: 28px; }
+        .s24-up { bottom: 125px; background: rgba(123,216,143,0.3); border: 2px solid var(--green); align-items: flex-start; padding-top: 6px; transform-origin: 50% 100%; box-sizing: border-box; }
+        .s24-dn { top: 127px; background: rgba(240,96,93,0.3); border: 2px solid var(--red); align-items: flex-end; padding-bottom: 6px; transform-origin: 50% 0; box-sizing: border-box; }
+        .s24-l1 { left: 120px; } .s24-l2 { left: 420px; }
+        .s24-cap { position: absolute; top: -36px; font-family: var(--mono); font-size: 16px; color: var(--dim); letter-spacing: 0.1em; width: 300px; }
+        #s24-wg-up { height: 30px; } #s24-wg-dn { height: 30px; }
+        #s24-dr-up { height: 100px; } #s24-dr-dn { height: 120px; }
+        #s24-note { position: absolute; left: 150px; top: 880px; }
+        #s24-lesson { position: absolute; left: 150px; top: 300px; width: 1620px; }
+        #s24-lesson .row { margin-top: 40px; }
+        #s24-lesson .card { flex: 1; }
+        #s24-lesson .big { font-size: 90px; }
+        #s24-risk { margin-top: 40px; }
+      </style>
+      <div id="root" data-composition-id="s24" data-width="1920" data-height="1080">
+        <div id="s24-open">
+          <video id="s24-plate" class="video-plate" src="assets/video/golf.mp4" data-start="0" data-duration="5" data-track-index="0" muted playsinline></video>
+          <div class="shade"></div>
+          <div class="copy"><div class="kicker">10a · An analogy</div><h2 class="title">Think of a golf bag</h2></div>
+        </div>
+        <div class="hdr" id="s24-hdr">
+          <div class="kicker">10a · Leverage</div>
+          <h2 class="title-md">The golf club analogy</h2>
+        </div>
+        <div id="s24-cols">
+          <div class="card" id="s24-wedge">
+            <div class="s24-top">
+              <svg class="s24-club" viewBox="0 0 90 170" fill="none"><path d="M60 8 L38 130" stroke="#a3aec2" stroke-width="6" stroke-linecap="round" /><path d="M38 128 L14 160 L58 150 Z" fill="#4fd1c5" /></svg>
+              <div><h3>Pitching wedge</h3><p>Short, heavy · built for control</p>
+                <div class="s24-tags"><span class="chip teal">Low leverage</span><span class="chip">Mostly equity</span><span class="chip">Stable</span></div></div>
+            </div>
+            <div class="s24-roe">
+              <div class="s24-axis"></div>
+              <div class="s24-cap s24-l1">GOOD YEAR</div><div class="s24-cap s24-l2">BAD YEAR</div>
+              <div class="s24-b s24-up s24-l1" id="s24-wg-up">+10%</div>
+              <div class="s24-b s24-dn s24-l2" id="s24-wg-dn">−10%</div>
+            </div>
+          </div>
+          <div class="card" id="s24-driver">
+            <div class="s24-top">
+              <svg class="s24-club" viewBox="0 0 90 170" fill="none"><path d="M70 4 L30 138" stroke="#a3aec2" stroke-width="4" stroke-linecap="round" /><ellipse cx="30" cy="150" rx="26" ry="16" fill="#f5b041" /></svg>
+              <div><h3>Driver</h3><p>Long, light · built for distance</p>
+                <div class="s24-tags"><span class="chip amber">High leverage</span><span class="chip">Lots of debt</span><span class="chip red">Fixed interest</span></div></div>
+            </div>
+            <div class="s24-roe">
+              <div class="s24-axis"></div>
+              <div class="s24-cap s24-l1">GOOD YEAR</div><div class="s24-cap s24-l2">BAD YEAR</div>
+              <div class="s24-b s24-up s24-l1" id="s24-dr-up">+30%</div>
+              <div class="s24-b s24-dn s24-l2" id="s24-dr-dn">−70%</div>
+            </div>
+          </div>
+        </div>
+        <div id="s24-note" class="note">Illustrative return on equity · $100 of assets, ±10% return on assets · Driver: $20 equity + $80 debt at 5%</div>
+        <div id="s24-lesson">
+          <div class="kicker">The lesson</div>
+          <h2 class="title-md" style="margin-top: 14px">Choose leverage for the game you're playing</h2>
+          <div class="row">
+            <div class="card" id="s24-l-a"><div class="label">Need control?</div><div class="big teal">Use less</div></div>
+            <div class="card" id="s24-l-b"><div class="label">Need distance?</div><div class="big amber">Use more</div></div>
+          </div>
+          <div id="s24-risk"><span class="exam"><span class="lbl">ALWAYS</span>Weigh the risk against the expected return</span></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 36.556;
+          const tl = gsap.timeline({ paused: true });
+          const grow = (sel, at) => tl.fromTo(sel, { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power3.out" }, at);
+          tl.fromTo("#s24-plate", { scale: 1.04 }, { scale: 1, duration: 5, ease: "none" }, 0);
+          tl.fromTo("#s24-open .copy > *", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 }, 0.1);
+          tl.to("#s24-open", { opacity: 0, duration: 0.6 }, 4.3);
+          tl.fromTo("#s24-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12 }, 4.6);
+          tl.fromTo("#s24-wedge", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 1.7);
+          tl.fromTo("#s24-wedge .chip", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 1.0 }, V + 5.1);
+          tl.fromTo("#s24-wedge .s24-roe", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 8.1);
+          grow("#s24-wg-up", V + 8.2);
+          grow("#s24-wg-dn", V + 9.7);
+          tl.fromTo("#s24-driver", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 11.7);
+          tl.fromTo("#s24-driver .chip", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.5 }, V + 14.8);
+          tl.fromTo("#s24-driver .s24-roe", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 16.0);
+          grow("#s24-dr-up", V + 17.7);
+          grow("#s24-dr-dn", V + 20.3);
+          tl.fromTo("#s24-note", { opacity: 0 }, { opacity: 1, duration: 0.4 }, V + 17.0);
+          tl.to("#s24-dr-dn", { boxShadow: "0 0 40px rgba(240,96,93,0.6)", duration: 0.4 }, V + 22.8);
+          tl.to("#s24-hdr, #s24-cols, #s24-note", { opacity: 0, duration: 0.45 }, V + 24.6);
+          tl.fromTo("#s24-lesson .kicker, #s24-lesson .title-md", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.12 }, V + 25.0);
+          tl.fromTo("#s24-l-a", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 28.3);
+          tl.fromTo("#s24-l-b", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 30.2);
+          tl.fromTo("#s24-risk", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, V + 32.2);
+          tl.to("#s24-lesson", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s24"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "explainer-business-entities",
+  "version": "1.0.0",
+  "description": "Hyperframes explainer video: Business Entities, Governance & Leverage (study guide)",
+  "scripts": {
+    "fetch": "bash script/fetch-media.sh",
+    "build": "node script/build-index.mjs",
+    "lint": "hyperframes lint",
+    "preview": "hyperframes preview",
+    "snapshot": "hyperframes snapshot",
+    "render": "hyperframes render --output renders/explainer.mp4"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@fontsource/fraunces": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "gsap": "^3.15.0",
+    "hyperframes": "^0.8.96"
+  }
+}

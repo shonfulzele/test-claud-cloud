@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s17-obj { position: absolute; left: 150px; top: 320px; width: 620px; display: flex; flex-direction: column; gap: 16px; }
+        #s17-obj .chip { font-size: 26px; padding: 16px 26px; justify-content: flex-start; }
+        #s17-coso { position: absolute; left: 860px; top: 300px; width: 910px; }
+        .s17-layer { display: flex; align-items: center; gap: 22px; height: 104px; margin-top: 12px; border-radius: 16px; padding: 0 30px;
+          background: var(--panel); border: 1px solid var(--line); font-size: 30px; font-weight: 700; box-sizing: border-box; }
+        .s17-layer .n { font-family: var(--mono); font-size: 20px; color: var(--amber); width: 40px; }
+        .s17-layer small { font-weight: 500; font-size: 20px; color: var(--mute); margin-left: auto; max-width: 380px; text-align: right; }
+        #s17-end { position: absolute; left: 150px; top: 320px; width: 1620px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        #s17-end .card { height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 50px 60px; }
+        #s17-end .big { font-size: 150px; }
+      </style>
+      <div id="root" data-composition-id="s17" data-width="1920" data-height="1080">
+        <div class="hdr" id="s17-hdr">
+          <div class="kicker">9a · Governance</div>
+          <h2 class="title-md">Internal controls &amp; the COSO framework</h2>
+        </div>
+        <div id="s17-obj">
+          <div class="label">Objectives</div>
+          <span class="chip teal" id="s17-o1">Safeguard assets</span>
+          <span class="chip teal" id="s17-o2">Reliable financial reporting</span>
+          <span class="chip teal" id="s17-o3">Efficient operations</span>
+          <span class="chip teal" id="s17-o4">Regulatory compliance</span>
+        </div>
+        <div id="s17-coso">
+          <div class="label">COSO · five components</div>
+          <div class="s17-layer" id="s17-l1"><span class="n">1</span>Control environment<small>Tone &amp; culture of control</small></div>
+          <div class="s17-layer" id="s17-l2"><span class="n">2</span>Risk assessment<small>Identify &amp; analyze risks</small></div>
+          <div class="s17-layer" id="s17-l3"><span class="n">3</span>Control activities<small>Policies that mitigate risk</small></div>
+          <div class="s17-layer" id="s17-l4"><span class="n">4</span>Information &amp; communication<small>Accurate, timely sharing</small></div>
+          <div class="s17-layer" id="s17-l5"><span class="n">5</span>Monitoring<small>Ongoing evaluations</small></div>
+        </div>
+        <div id="s17-end">
+          <div class="card" id="s17-e1"><div class="label">Bylaws</div><div class="big amber">Who &amp; What</div><p>Structure &amp; governance</p></div>
+          <div class="card hl" id="s17-e2"><div class="label">Internal controls</div><div class="big teal">How</div><p>Operational processes that manage risk</p></div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 26.356;
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s17-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s17-obj .label", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 2.0);
+          [["#s17-o1", 3.5], ["#s17-o2", 5.0], ["#s17-o3", 7.0], ["#s17-o4", 8.7]].forEach(([s, t]) =>
+            tl.fromTo(s, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4 }, V + t));
+          tl.fromTo("#s17-coso .label", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 10.3);
+          [["#s17-l1", 12.9], ["#s17-l2", 14.2], ["#s17-l3", 15.3], ["#s17-l4", 16.5], ["#s17-l5", 18.6]].forEach(([s, t]) => {
+            tl.fromTo(s, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, V + t);
+            tl.to(s, { borderColor: "#f5b041", duration: 0.2 }, V + t);
+            tl.to(s, { borderColor: "rgba(244,239,230,0.12)", duration: 0.5 }, V + t + 1.0);
+          });
+          tl.to("#s17-hdr, #s17-obj, #s17-coso", { opacity: 0, duration: 0.4 }, V + 19.8);
+          tl.fromTo("#s17-e1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, V + 20.6);
+          tl.fromTo("#s17-e2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, V + 23.0);
+          tl.to("#s17-end", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s17"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s20-line { position: absolute; left: 150px; top: 310px; width: 560px; }
+        .s20-q { display: flex; align-items: center; gap: 22px; height: 118px; margin-top: 16px; padding: 0 28px; border-radius: 18px; box-sizing: border-box;
+          background: var(--panel); border: 1px solid var(--line); font-size: 30px; font-weight: 700; }
+        .s20-q .n { font-family: var(--serif); font-size: 58px; color: var(--dim); width: 44px; }
+        #s20-q1 { border-color: var(--blue); } #s20-q2 { border-color: var(--amber); } #s20-q3 { border-color: var(--red); }
+        #s20-cmp { position: absolute; left: 790px; top: 310px; width: 980px; }
+        #s20-cmp .tbl td { font-size: 25px; padding: 18px 22px; }
+        #s20-cmp .tbl td:first-child { color: var(--mute); width: 210px; }
+        #s20-feat { display: flex; gap: 12px; margin-top: 14px; }
+        #s20-cls { position: absolute; left: 790px; top: 850px; width: 980px; display: flex; gap: 16px; align-items: center; }
+      </style>
+      <div id="root" data-composition-id="s20" data-width="1920" data-height="1080">
+        <div class="hdr" id="s20-hdr">
+          <div class="kicker">9a-ii · Types of shares</div>
+          <h2 class="title-md">Common vs Preferred stock</h2>
+        </div>
+        <div id="s20-line">
+          <div class="label">Liquidation — who gets paid first</div>
+          <div class="s20-q" id="s20-q1"><span class="n">1</span>Creditors &amp; debt holders</div>
+          <div class="s20-q" id="s20-q2"><span class="n">2</span>Preferred shareholders</div>
+          <div class="s20-q" id="s20-q3"><span class="n">3</span>Common — last in line</div>
+        </div>
+        <div id="s20-cmp">
+          <table class="tbl">
+            <thead><tr><th></th><th>Common</th><th class="amber">Preferred</th></tr></thead>
+            <tbody>
+              <tr id="s20-r1"><td>Voting</td><td><span id="s20-c11">1 vote per share</span></td><td><span id="s20-c12">Usually none</span></td></tr>
+              <tr id="s20-r2"><td>Dividends</td><td><span id="s20-c21">After preferred</span></td><td><span id="s20-c22" class="amber">Fixed · paid first</span></td></tr>
+              <tr id="s20-r3"><td>Liquidation</td><td><span id="s20-c31" class="red">Last in line</span></td><td><span id="s20-c32" class="amber">Priority on assets</span></td></tr>
+            </tbody>
+          </table>
+          <div id="s20-feat">
+            <span class="label" style="align-self: center">Preferred can be</span>
+            <span class="chip" id="s20-f1">Callable</span><span class="chip" id="s20-f2">Cumulative</span><span class="chip" id="s20-f3">Convertible</span>
+          </div>
+        </div>
+        <div id="s20-cls">
+          <span class="chip blue" id="s20-ca">Class A</span><span class="chip" id="s20-cb">Class B</span>
+          <span class="body" id="s20-clt">Private companies may create share classes to give <b style="color: var(--ink)">founders</b> more voting power.</span>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 29.98;
+          const tl = gsap.timeline({ paused: true });
+          const cell = (sel, at) => tl.fromTo(sel, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35 }, at);
+          tl.fromTo("#s20-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s20-cmp thead, #s20-r1, #s20-r2, #s20-r3", { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.08 }, 0.5);
+          cell("#s20-c11", V + 1.5);
+          tl.fromTo("#s20-line .label", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 3.3);
+          tl.fromTo("#s20-q3", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45 }, V + 3.4);
+          cell("#s20-c21", V + 4.9);
+          cell("#s20-c31", V + 7.2);
+          tl.fromTo("#s20-q1", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45 }, V + 10.3);
+          tl.fromTo("#s20-q2", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45 }, V + 11.0);
+          cell("#s20-c22", V + 14.2);
+          cell("#s20-c32", V + 15.9);
+          cell("#s20-c12", V + 16.8);
+          tl.fromTo("#s20-feat .label", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 19.3);
+          cell("#s20-f1", V + 19.6);
+          cell("#s20-f2", V + 20.5);
+          cell("#s20-f3", V + 21.3);
+          cell("#s20-ca", V + 24.8);
+          cell("#s20-cb", V + 25.6);
+          cell("#s20-clt", V + 26.0);
+          tl.to("#s20-hdr, #s20-line, #s20-cmp, #s20-cls", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s20"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

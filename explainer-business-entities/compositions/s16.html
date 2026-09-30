@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="assets/theme.css" />
+      <style>
+        #root { position: absolute; inset: 0; }
+        #s16-cmp { position: absolute; left: 150px; top: 310px; width: 700px; display: flex; flex-direction: column; gap: 22px; }
+        #s16-cmp .card { padding: 26px 32px; }
+        .s16-kv { display: flex; justify-content: space-between; font-size: 26px; padding: 8px 0; }
+        .s16-kv .k { color: var(--mute); }
+        #s16-toc { position: absolute; left: 930px; top: 310px; width: 840px; }
+        #s16-toc .card { padding: 34px 40px; }
+        #s16-toc .list li { font-size: 29px; }
+        #s16-sm { margin-left: 12px; font-size: 18px; padding: 6px 14px; }
+      </style>
+      <div id="root" data-composition-id="s16" data-width="1920" data-height="1080">
+        <div class="hdr" id="s16-hdr">
+          <div class="kicker">9a · Governance</div>
+          <h2 class="title-md">Bylaws: the internal rulebook</h2>
+        </div>
+        <div id="s16-cmp">
+          <div class="card" id="s16-by">
+            <h3>Bylaws</h3>
+            <div class="s16-kv" id="s16-b1"><span class="k">Legally binding</span><b class="teal">Yes</b></div>
+            <div class="s16-kv" id="s16-b2"><span class="k">Adopted by</span><b>The board</b></div>
+            <div class="s16-kv" id="s16-b3"><span class="k">Filed with the state</span><b class="red">No</b></div>
+          </div>
+          <div class="card" id="s16-ar" style="opacity: 0.9">
+            <h3 class="mute" style="font-size: 32px">vs. Articles of Incorporation</h3>
+            <div class="s16-kv"><span class="k">Filed with the state</span><b class="amber">Yes · public record</b></div>
+          </div>
+        </div>
+        <div id="s16-toc">
+          <div class="card">
+            <div class="label" style="margin-bottom: 22px">What bylaws cover</div>
+            <ul class="list">
+              <li id="s16-i1"><span class="n">01</span>Board of directors — size, elections, removal</li>
+              <li id="s16-i2"><span class="n">02</span>Officers — appointment and duties</li>
+              <li id="s16-i3"><span class="n">03</span>Meetings — notice, quorum, voting</li>
+              <li id="s16-i4"><span class="n">04</span>Shareholder rights &amp; stock transfers</li>
+              <li id="s16-i5"><span class="n">05</span>Conflicts of interest</li>
+              <li id="s16-i6"><span class="n">06</span>Amending the bylaws <span class="chip amber" id="s16-sm">often a supermajority</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <script>
+        (() => {
+          const V = 0.5;
+          const D = 28.156;
+          const tl = gsap.timeline({ paused: true });
+          const item = (sel, at) => tl.fromTo(sel, { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, at);
+          tl.fromTo("#s16-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out" }, 0.1);
+          tl.fromTo("#s16-by", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 1.0);
+          tl.fromTo("#s16-b1, #s16-b2, #s16-b3", { opacity: 0 }, { opacity: 0, duration: 0.01 }, V + 1.0);
+          item("#s16-b1", V + 3.2);
+          item("#s16-b2", V + 4.2);
+          tl.fromTo("#s16-ar", { opacity: 0, y: 30 }, { opacity: 0.9, y: 0, duration: 0.5 }, V + 6.0);
+          item("#s16-b3", V + 7.5);
+          tl.fromTo("#s16-toc", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5 }, V + 9.4);
+          item("#s16-i1", V + 10.3);
+          item("#s16-i2", V + 13.6);
+          item("#s16-i3", V + 15.5);
+          item("#s16-i4", V + 19.0);
+          item("#s16-i5", V + 21.1);
+          item("#s16-i6", V + 22.8);
+          tl.fromTo("#s16-sm", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, V + 25.5);
+          tl.to("#s16-hdr, #s16-cmp, #s16-toc", { opacity: 0, duration: 0.35 }, D - 0.4);
+          window.__timelines["s16"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
