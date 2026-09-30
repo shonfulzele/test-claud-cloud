@@ -27,34 +27,37 @@ const slots = scenes.map((s) => {
 const total = r(t);
 const byId = Object.fromEntries(slots.map((s) => [s.id, s]));
 
-const hosts = slots
+function page(sub, t0, t1) {
+const hosts = sub
   .map(
     (s) => `      <!-- ${s.id} · ${s.title} -->
       <div id="${s.id}" data-composition-id="${s.id}" data-composition-src="compositions/${s.id}.html"
-        data-start="${s.start}" data-duration="${s.dur}" data-track-index="1" data-width="1920" data-height="1080"></div>`,
+        data-start="${r(s.start - t0)}" data-duration="${s.dur}" data-track-index="1" data-width="1920" data-height="1080"></div>`,
   )
   .join("\n");
 
-const audios = slots
+const audios = sub
   .map(
     (s) =>
-      `      <audio id="vo-${s.id}" src="assets/audio/${s.id}.mp3" data-start="${s.voStart}" data-duration="${r(s.audio)}" data-track-index="10" data-volume="1"></audio>`,
+      `      <audio id="vo-${s.id}" src="assets/audio/${s.id}.mp3" data-start="${r(s.voStart - t0)}" data-duration="${r(s.audio)}" data-track-index="10" data-volume="1"></audio>`,
   )
   .join("\n");
 
-const chapterEls = chapters
+const live = chapters.filter((c) => byId[c.to].start + byId[c.to].dur > t0 + 0.001 && byId[c.from].start < t1 - 0.001);
+  const chapterEls = live
   .map((c) => {
-    const a = byId[c.from].start;
-    const b = byId[c.to].start + byId[c.to].dur;
+    const a = Math.max(byId[c.from].start, t0) - t0;
+    const b = Math.min(byId[c.to].start + byId[c.to].dur, t1) - t0;
     return `      <div id="hud-${c.id}" class="clip hud-chapter" data-start="${r(a)}" data-duration="${r(b - a)}" data-track-index="3"><span class="hud-dot"></span><span class="hud-text">${c.label}</span></div>`;
   })
   .join("\n");
 
-const chapterTweens = chapters
-  .map((c) => `      tl.fromTo("#hud-${c.id} .hud-text", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }, ${byId[c.from].start + 0.2});`)
+const chapterTweens = live
+  .filter((c) => byId[c.from].start >= t0)
+  .map((c) => `      tl.fromTo("#hud-${c.id} .hud-text", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }, ${r(byId[c.from].start - t0 + 0.2)});`)
   .join("\n");
 
-const html = `<!doctype html>
+  return `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -85,7 +88,7 @@ const html = `<!doctype html>
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="${total}">
+    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="${r(t1 - t0)}">
       <div id="bg"><div class="glow"></div><div class="glow2"></div><div class="grid"></div></div>
 
       <!-- HUD -->
@@ -101,17 +104,29 @@ ${audios}
     </div>
     <script>
       const tl = gsap.timeline({ paused: true });
-      tl.fromTo("#progress-fill", { scaleX: 0 }, { scaleX: 1, duration: ${total}, ease: "none" }, 0);
-      tl.fromTo("#bg .glow", { x: 0, y: 0 }, { x: -260, y: 120, duration: ${total}, ease: "sine.inOut" }, 0);
-      tl.fromTo("#bg .glow2", { x: 0, y: 0 }, { x: 300, y: -160, duration: ${total}, ease: "sine.inOut" }, 0);
+      tl.fromTo("#progress-fill", { scaleX: ${r(t0 / total)} }, { scaleX: ${r(t1 / total)}, duration: ${r(t1 - t0)}, ease: "none" }, 0);
+      tl.fromTo("#bg .glow", { x: ${r(-260 * t0 / total)}, y: ${r(120 * t0 / total)} }, { x: ${r(-260 * t1 / total)}, y: ${r(120 * t1 / total)}, duration: ${r(t1 - t0)}, ease: "none" }, 0);
+      tl.fromTo("#bg .glow2", { x: ${r(300 * t0 / total)}, y: ${r(-160 * t0 / total)} }, { x: ${r(300 * t1 / total)}, y: ${r(-160 * t1 / total)}, duration: ${r(t1 - t0)}, ease: "none" }, 0);
 ${chapterTweens}
       window.__timelines["main"] = tl;
     </script>
   </body>
 </html>
 `;
+}
 
-writeFileSync(new URL("../index.html", here), html);
+writeFileSync(new URL("../index.html", here), page(slots, 0, total));
+
+// `node script/build-index.mjs --parts` also writes render parts (for machines that can't render 13+ minutes in one go):  part-1.html … part-4.html
+// Concatenate the rendered parts in order to get the same video as index.html.
+const PARTS = [["s01", "s07"], ["s08", "s14"], ["s15", "s21"], ["s22", "s27"]];
+if (process.argv.includes("--parts")) PARTS.forEach(([a, b], i) => {
+  const sub = slots.slice(slots.findIndex((s) => s.id === a), slots.findIndex((s) => s.id === b) + 1);
+  const t0 = sub[0].start;
+  const t1 = r(sub.at(-1).start + sub.at(-1).dur);
+  writeFileSync(new URL(`../part-${i + 1}.html`, here), page(sub, t0, t1).replace('data-composition-id="main"', `data-composition-id="part-${i + 1}"`).replace('window.__timelines["main"]', `window.__timelines["part-${i + 1}"]`));
+});
+
 writeFileSync(
   new URL("../script/scene-times.json", here),
   JSON.stringify(Object.fromEntries(slots.map((s) => [s.id, { start: s.start, dur: s.dur, vo: s.voStart }])), null, 1),
