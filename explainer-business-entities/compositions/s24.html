@@ -32,7 +32,7 @@
       </style>
       <div id="root" data-composition-id="s24" data-width="1920" data-height="1080">
         <div id="s24-open">
-          <video id="s24-plate" class="video-plate" src="assets/video/golf.mp4" data-start="0" data-duration="5" data-track-index="0" muted playsinline></video>
+          <video id="s24-plate" class="video-plate" src="assets/video/golf.mp4" data-start="0" data-duration="3.2" data-track-index="0" muted playsinline></video>
           <div class="shade"></div>
           <div class="copy"><div class="kicker">10a · An analogy</div><h2 class="title">Think of a golf bag</h2></div>
         </div>
@@ -87,9 +87,9 @@
           const grow = (sel, at) => tl.fromTo(sel, { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power3.out" }, at);
           tl.fromTo("#s24-plate", { scale: 1.04 }, { scale: 1, duration: 5, ease: "none" }, 0);
           tl.fromTo("#s24-open .copy > *", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 }, 0.1);
-          tl.to("#s24-open", { opacity: 0, duration: 0.6 }, 4.3);
-          tl.fromTo("#s24-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12 }, 4.6);
-          tl.fromTo("#s24-wedge", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 1.7);
+          tl.to("#s24-open", { opacity: 0, duration: 0.5 }, 2.6);
+          tl.fromTo("#s24-hdr > *", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12 }, 2.9);
+          tl.fromTo("#s24-wedge", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, V + 2.7);
           tl.fromTo("#s24-wedge .chip", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 1.0 }, V + 5.1);
           tl.fromTo("#s24-wedge .s24-roe", { opacity: 0 }, { opacity: 1, duration: 0.3 }, V + 8.1);
           grow("#s24-wg-up", V + 8.2);

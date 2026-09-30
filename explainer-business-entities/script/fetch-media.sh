@@ -4,7 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 B=https://d8j0ntlcm91z4.cloudfront.net/user_321Q5XgAzStJz6ElCxpPKxKEED6/hf_20260930_
-get() { [ -s "$2" ] || curl -fsSL --retry 3 -o "$2" "$B$1"; echo "ok  $2"; }
+get() { [ -s "$2" ] || { curl -fsSL --retry 3 -o "$2" "$B$1" && touch "$2.new"; }; echo "ok  $2"; }
 mkdir -p assets/audio assets/video
 while read -r id u; do get "$u.mp3" "assets/audio/$id.mp3"; done <<'LIST'
 s01 064410_e6878ca3-5b09-42c4-be82-ba1094fad2ef
@@ -43,10 +43,10 @@ golf 064605_f0fa1dc8-d1be-472a-aa70-8eb445a11587
 port 064605_c442a3ef-d1e2-4c29-8f2f-bd2d403fcc60
 brain 064605_6444bec9-3ab6-4e0a-8ffd-3f5cbd67901b
 LIST
-# Kling clips ship with ~5s keyframe intervals, which makes seeks freeze; re-encode with a keyframe every second.
+# Kling clips ship with ~5s keyframe intervals, which makes seeks freeze; re-encode fresh downloads with a keyframe every second.
 for f in assets/video/*.mp4; do
-  if ! [ -e "$f.kf" ]; then
+  if [ -e "$f.new" ]; then
     ffmpeg -loglevel error -y -i "$f" -an -c:v libx264 -crf 16 -r 30 -g 30 -keyint_min 30 -pix_fmt yuv420p -movflags +faststart "$f.tmp.mp4" \
-      && mv "$f.tmp.mp4" "$f" && touch "$f.kf"
+      && mv "$f.tmp.mp4" "$f" && rm "$f.new"
   fi
 done
